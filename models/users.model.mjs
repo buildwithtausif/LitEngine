@@ -33,7 +33,6 @@ export async function find_user_by_email(email) {
         throw err;
     }
 }
-
 // create a new user in database
 export async function create_user(name, email, public_id) {
    let post_query = `
@@ -49,7 +48,6 @@ export async function create_user(name, email, public_id) {
         throw err;
    }
 }
-
 // update user-details in database
 export async function edit_user(public_id, newName, newEmail) {
     let put_query = `
@@ -80,7 +78,6 @@ export async function edit_user(public_id, newName, newEmail) {
         throw err;
     }
 }
-
 // Delete a specific user by ID from database
 export async function del_user_by_id(public_id) {
     let delete_query = `
