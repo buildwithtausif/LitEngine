@@ -6,3 +6,5 @@ node_modules/
 brainstorms/
 # exlude bruno collections folder
 booky-api-testing/
+
+.idea/
