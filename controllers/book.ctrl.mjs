@@ -1,6 +1,6 @@
 /*
     /books endpoint follows CQRS architecture along with MVC
-    separating dynamic query building funtionality from rest of three CRUD operations i.e CUD
+    separating dynamic query building functionality from rest of three CRUD operations i.e. CUD
 */
 
 import find_books from "../models/read_books.model.mjs";
@@ -14,9 +14,9 @@ import {
 
 // Create
 /*
-    original idea was to have "isbn_autolookup" but for some reasons 
+    original idea was to have "isbn_autolookup" but for some reason
     I've not been able to implement it for the time being... 
-    later on i'll implement that as well 
+    later on I'll implement that as well
 
     the one below is manual entry that follows either single object entry or an array of objects
 
@@ -143,7 +143,7 @@ const getbooks = async (req, res) => {
   const search_cond = req.query; // req.query is an Object?
   try {
     const data = await find_books(search_cond);
-    // if a search is attempted but no data is recieved return 404
+    // if a search is attempted but no data is received return 404
     if (
       (Object.keys(search_cond).length > 0 && data.length === 0) ||
       data.length === 0
@@ -189,7 +189,7 @@ const update_books = async (req, res) => {
       const status = result.error.includes("Conflict") ? 409 : 400;
       return res.status(status).json({ error: result.error });
     }
-    // if nothing is recieved
+    // if nothing is received
     if (!result) {
       return res
         .status(404)
