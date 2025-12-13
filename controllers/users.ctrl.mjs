@@ -31,20 +31,21 @@ const reg_newuser = async (req, res) => {
   try {
     // create publicID and check for conflicts if id_exists continue the trial to get a unique id
     let public_id;
-    let Idexists = false;
+    let id_exists = false;
     do {
       public_id = generatePublicId();
-      const IdExists = await recordExist({
+      id_exists = await recordExist({
         tableName: "users",
         colName: "public_id",
         value: public_id,
       });
-      if (IdExists) {
-        IdExists = true;
+      // if conflict checker returns true then re-run loop and generate a new id and check again
+      if (id_exists) {
+        id_exists = true;
       }
-    } while (Idexists);
-    // check for any conflicting values of emails in database to ensure unque users
-    const emailExists = await recordExist({
+    } while (id_exists);
+    // check for any conflicting values of emails in database to ensure unique users
+    let emailExists = await recordExist({
       tableName: "users",
       colName: "email",
       value: email,

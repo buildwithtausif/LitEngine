@@ -5,7 +5,11 @@
 
 */
 import db, { pgp } from "./db.mjs";
-
+/**
+ * checks for any due or overdue directly in the database
+ * @param {string} public_id - receives user id from the borrow controller
+ * @returns {Promise<Object>}
+ */
 export async function checkDueOrOverdue(public_id) {
   /* 
         Overdue: returned = null && dueDate < now()
@@ -31,7 +35,11 @@ export async function checkDueOrOverdue(public_id) {
     return { alldues: [], overdue: [] };
   }
 }
-
+/**
+ * draws a comparison between the original amount of this book in the library and the current count after books are borrowed (if any)
+ * @param {string} book_uuid - receives book id from the borrow controller
+ * @returns {Promise<number>}
+ */
 export async function getBorrowedCountForBook(book_uuid) {
   /* function-body */
   let query = `
@@ -48,7 +56,19 @@ export async function getBorrowedCountForBook(book_uuid) {
     throw err;
   }
 }
-
+/**
+ * Gets this stream of object when the controller verifies any fallacy on borrow transaction of books
+ * @typedef {Object} borrowReqStruct
+ * @property {string} transaction_id - The unique ID for a borrow transaction
+ * @property {string} public_id - The unique ID of the borrower registered in the library
+ * @property {string} book_id - The unique ID of the book which is in the library
+ * @property {Date} borrowDate - Gets the date of transaction (new Date)
+ * @property {Date} dueDate - Sets the Due date of the book w.r.t borrowDate + 14 in total 15 Days
+ */
+/**
+ * @param {borrowReqStruct} newBorrowings - A borrow request stream from borrow.ctrl.mjs with borrowReqStruct
+ * @returns {Promise<Object>}
+ */
 export async function borrowTransaction(newBorrowings) {
   /* create transaction */
   try {
@@ -60,19 +80,21 @@ export async function borrowTransaction(newBorrowings) {
                        The controller checks the book's quantity (which is 1).
                        The check if (borrowedCount >= bookDetails.quantity) (i.e., 0 >= 1) is false. Alice's request is approved to proceed.
 
-                       similarly it returns 1 for bob as well as alice's transaction is not completed yet and Bob also get's approval for book availability
+                       similarly it returns 1 for bob as well as alice's transaction is not completed yet and Bob also gets approval for book availability
         */
       // in that case check the availability inside transaction as well
       for (const borrow of newBorrowings) {
+        // gets the total quantity and the title of the book associated with its uuid
         const bookDetails = await t.one(
           "SELECT title, quantity FROM books WHERE uuid = $1",
           [borrow.book_id]
         );
+        // getting the count of all books which are issued with this book id and is not yet returned
         const { count } = await t.one(
           "SELECT COUNT(*) FROM borrow_logs WHERE book_id = $1 AND return_date IS NULL",
           [borrow.book_id]
         );
-
+        // using unary-plus to convert count "a string" into a number then comparing
         if (+count >= bookDetails.quantity) {
           throw new Error(
             `Conflict: All copies of '${bookDetails.title}' are currently borrowed.`
