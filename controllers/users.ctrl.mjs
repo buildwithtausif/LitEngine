@@ -30,14 +30,15 @@ const reg_newuser = async (req, res) => {
   // final validation & create user
   try {
     // create publicID and check for conflicts if id_exists continue the trial to get a unique id
-    let public_id;
+    let user_id;
     let id_exists = false;
     do {
-      public_id = generatePublicId();
+      user_id = generatePublicId();
       id_exists = await recordExist({
+        schema: "library",
         tableName: "users",
-        colName: "public_id",
-        value: public_id,
+        colName: "_id",
+        value: user_id,
       });
       // if conflict checker returns true then re-run loop and generate a new id and check again
       if (id_exists) {
@@ -46,6 +47,7 @@ const reg_newuser = async (req, res) => {
     } while (id_exists);
     // check for any conflicting values of emails in database to ensure unique users
     let emailExists = await recordExist({
+      schema: "library",
       tableName: "users",
       colName: "email",
       value: email,
@@ -57,7 +59,7 @@ const reg_newuser = async (req, res) => {
           error: `Operation aborted — database conflict detected. Use unique or updated values and retry.`,
         });
     }
-    const newUser = await create_user(name, email, public_id);
+    const newUser = await create_user(name, email, user_id);
     res.status(201).json(newUser); // 201 means "Created"
   } catch (err) {
     console.error(err);
@@ -72,11 +74,11 @@ const reg_newuser = async (req, res) => {
 // Read
 const getusers = async (req, res) => {
   try {
-    // Check for query parameters in the URL (e.g., /users?public_id=7)
-    const { public_id, email } = req.query;
+    // Check for query parameters in the URL (e.g., /users?user_id=7)
+    const { user_id, email } = req.query;
     // if both public id and email are provided and are not related to same user give error
-    if (public_id && email) {
-      const conflict = await recordExist({tableName: 'users', colName: 'email', value: email, excludeID: public_id});
+    if (user_id && email) {
+      const conflict = await recordExist({schema: "library", tableName: "users", colName: "email", value: email, excludeID: user_id});
       /* rationale is if conflict is found that means either the user has entered
         or some id that is taken by some other user or it does not exist
       */
@@ -85,8 +87,8 @@ const getusers = async (req, res) => {
      }
     }
     // if an id is provided inside query
-    if (public_id) {
-      const user = await find_user_by_id(public_id);
+    if (user_id) {
+      const user = await find_user_by_id(user_id);
       // if user is found return it, otherwise return 404
       return user
         ? res.status(200).json(user)
@@ -109,7 +111,7 @@ const getusers = async (req, res) => {
         ? res.status(200).json(user)
         : res
             .status(404)
-            .json({ message: "User not found with associated public_id!" });
+            .json({ message: "User not found with associated user_id!" });
     }
     // list all users if no query is provided
     const allUsers = await list_users();
@@ -128,7 +130,7 @@ const getusers = async (req, res) => {
 const update_user = async (req, res) => {
   try {
     // get id from the request parameter :id
-    const { public_id } = req.params;
+    const { user_id } = req.params;
     // get newName, newEmail from request body
     const { newName, newEmail } = req.body;
     // check if the data is sent inside body
@@ -153,10 +155,11 @@ const update_user = async (req, res) => {
       }
       // check conflicting matches to newEmail in existing database
       const isTaken = await recordExist({
+        schema: "library",
         tableName: "users",
         colName: "email",
         value: newEmail,
-        excludeID: public_id,
+        excludeID: user_id,
       });
       if (isTaken) {
         return res
@@ -167,8 +170,8 @@ const update_user = async (req, res) => {
       }
     }
     // pass recieved data to users.model.mjs after validation for updates in database
-    const updatedUsr = await edit_user(public_id, newName, newEmail);
-    // send 200 response only when user is found with public_id
+    const updatedUsr = await edit_user(user_id, newName, newEmail);
+    // send 200 response only when user is found with user_id
     if (updatedUsr) {
       res
         .status(200)
@@ -192,8 +195,8 @@ const update_user = async (req, res) => {
 // handle DELETE note: i'm thinking to add multiple deletion feautres but not rn
 const delete_user = async (req, res) => {
   try {
-    const { public_id } = req.params;
-    const deleted_user = await del_user_by_id(public_id);
+    const { user_id } = req.params;
+    const deleted_user = await del_user_by_id(user_id);
     // if user is found and deleted show 200 ok else 404 no user found with associated id
     if (deleted_user) {
       res

@@ -1,5 +1,5 @@
 -- DROP DATABASE IF-EXISTS ON SETUP
-DROP DATABASE  litengine;
+-- DROP DATABASE  litengine;
 -- CREATE SCHEMA FOR litengine IF-NOT-EXISTS
 CREATE SCHEMA IF NOT EXISTS library;
 -- DROP TABLES IF-EXISTS ON SETUP
@@ -13,15 +13,15 @@ CREATE TABLE library.users (
     _id VARCHAR(30) PRIMARY KEY NOT NULL,
     email VARCHAR(255) UNIQUE NULL,
     name  varchar(255),
-    createdAt timestamptz NOT NULL,
-    updatedAt timestamptz NOT NULL,
-    deletedAt timestamptz NULL
+    created_at timestamptz DEFAULT NOW() NOT NULL,
+    updated_at timestamptz DEFAULT NOW() NOT NULL,
+    deleted_at timestamptz NULL
 );
 -- IMPLEMENTATION OF SOFT DELETE
 ALTER TABLE library.users
 ADD CONSTRAINT deleted_user_anonymized
 CHECK (
-    deletedAt IS NULL
+    deleted_at IS NULL
     OR (
         name = 'DELETED_USER'
         AND email IS NULL
@@ -35,8 +35,8 @@ CREATE TABLE library.books(
     title VARCHAR(255),
     author VARCHAR(255),
     publisher VARCHAR(255) NULL,
-    createdAt timestamptz NOT NULL,
-    updatedAt timestamptz NOT NULL
+    created_at timestamptz DEFAULT NOW() NOT NULL,
+    updated_at timestamptz DEFAULT NOW() NOT NULL
 );
 -- CREATE TABLES (3. INVENTORY)
 CREATE TABLE library.inventory(
@@ -44,19 +44,19 @@ CREATE TABLE library.inventory(
     bookId UUID,
     totalQty INT DEFAULT 0,
     currentQty INT,
-    createdAt timestamptz NOT NULL,
-    updatedAt timestamptz NOT NULL,
-    deletedAt timestamptz NULL,
+    created_at timestamptz DEFAULT NOW() NOT NULL,
+    updated_at timestamptz DEFAULT NOW() NOT NULL,
+    deleted_at timestamptz NULL,
     FOREIGN KEY (bookId) REFERENCES library.books(_id)
 );
 -- CREATE TABLES (4. BOOK LOANS)
 CREATE TABLE library.bookLoans(
     _id UUID PRIMARY KEY NOT NULL,
-    loanedTo VARCHAR(30),
-    loanedItem UUID,
-    loanedAt timestamptz NOT NULL,
-    dueAt timestamptz NOT NULL,
-    returnedAt timestamptz NULL,
-    FOREIGN KEY (loanedTo) REFERENCES library.users(_id),
-    FOREIGN KEY (loanedItem) REFERENCES library.inventory(_id)
+    loaned_to VARCHAR(30),
+    loaned_item UUID,
+    loaned_at timestamptz DEFAULT NOW() NOT NULL,
+    due_by timestamptz NOT NULL,
+    returned_on timestamptz NULL,
+    FOREIGN KEY (loaned_to) REFERENCES library.users(_id),
+    FOREIGN KEY (loaned_item) REFERENCES library.inventory(_id)
 );
