@@ -1,8 +1,8 @@
 import express from "express";
-import user_router from "./routes/user.routes.mjs";
-import book_router from "./routes/book.routes.mjs";
-import borrow_router from "./routes/borrow.routes.mjs";
-import return_router from "./routes/return.routes.mjs";
+import user_router from "./src/routes/user.routes.ts";
+import book_router from "./src/routes/book.routes.mjs";
+import borrow_router from "./src/routes/borrow.routes.mjs";
+import return_router from "./src/routes/return.routes.mjs";
 // create an express-server
 const server = express();
 // the middleware issue :'( earlier I've not included it coz, was not getting it but now ik
