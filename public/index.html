@@ -109,7 +109,7 @@
                                 <option value="isbn">By ISBN</option>
                                 <option value="genre">By Genre</option>
                                 <option value="publisher">By Publisher</option>
-                                <option value="uuid">By UUID</option>
+                                <option value="_id">By _id</option>
                             </select>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2">User ID or Email</label>
-                                <input type="text" id="borrow-user-input" placeholder="Enter public_id or email..." class="form-input">
+                                <input type="text" id="borrow-user-input" placeholder="Enter _id or email..." class="form-input">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2">Or Select User</label>
@@ -168,8 +168,8 @@
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2">ISBN or UUID</label>
-                                <input type="text" id="borrow-book-input" placeholder="Enter ISBN or UUID..." class="form-input">
+                                <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2">ISBN or _id</label>
+                                <input type="text" id="borrow-book-input" placeholder="Enter ISBN or _id..." class="form-input">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2">Or Select Book</label>
@@ -398,7 +398,7 @@
                     currentBooks.forEach(async (book) => {
                          const bookCard = document.createElement('div');
                         bookCard.className = 'surface rounded-lg p-4 flex flex-col justify-between shadow-sm hover:border-[var(--accent)] transition-colors';
-                        bookCard.dataset.bookUuid = book.uuid;
+                        bookCard.dataset.book_id = book._id;
                         bookCard.innerHTML = `
                             <div class="flex gap-4">
                                 <img src="https://placehold.co/128x192/1f2937/374151?text=..." alt="Cover of ${book.title}" class="w-20 h-28 object-cover rounded flex-shrink-0 bg-[var(--border)]">
@@ -414,11 +414,11 @@
                             </div>
                             <div class="text-xs font-mono text-[var(--text-secondary)] mt-3 border-t border-[var(--border)] pt-2 space-y-1">
                                 <div><strong class="font-medium text-[var(--text-muted)]">ISBN:</strong> ${book.isbn || 'N/A'}</div>
-                                <div class="truncate"><strong class="font-medium text-[var(--text-muted)]">UUID:</strong> ${book.uuid}</div>
+                                <div class="truncate"><strong class="font-medium text-[var(--text-muted)]">_id:</strong> ${book._id}</div>
                             </div>
                             <div class="flex items-center justify-end gap-3 mt-4">
-                                <button class="edit-book-btn group" data-uuid='${book.uuid}'>${iconEdit}</button>
-                                <button class="delete-book-btn group" data-uuid='${book.uuid}'>${iconDelete}</button>
+                                <button class="edit-book-btn group" data-_id='${book._id}'>${iconEdit}</button>
+                                <button class="delete-book-btn group" data-_id='${book._id}'>${iconDelete}</button>
                             </div>`;
                         booksListEl.appendChild(bookCard);
 
@@ -469,11 +469,11 @@
                     <div>
                         <span class="font-semibold text-sm">${user.name}</span>
                         <p class="text-xs text-[var(--text-secondary)]">${user.email}</p>
-                        <p class="text-xs font-mono text-[var(--text-muted)] mt-1">${user.public_id}</p>
+                        <p class="text-xs font-mono text-[var(--text-muted)] mt-1">${user._id}</p>
                     </div>
                     <div class="flex gap-2">
-                        <button class="edit-user-btn group" data-public-id='${user.public_id}'>${iconEdit}</button>
-                        <button class="delete-user-btn group" data-public-id='${user.public_id}'>${iconDelete}</button>
+                        <button class="edit-user-btn group" data-public-id='${user._id}'>${iconEdit}</button>
+                        <button class="delete-user-btn group" data-public-id='${user._id}'>${iconDelete}</button>
                     </div>`;
                 usersListSidebarEl.appendChild(userItemSidebar);
             });
@@ -492,7 +492,7 @@
                             allLoans.push({
                                 ...loan,
                                 book_title: book.title,
-                                book_uuid: book.uuid
+                                book__id: book._id
                             });
                         });
                     }
@@ -565,9 +565,9 @@
         function updateBorrowUI() {
             borrowUserSelect.innerHTML = '<option value="">Select a user</option>';
             allUsers.forEach(user => {
-                if(user.public_id) {
+                if(user._id) {
                     const option = document.createElement('option');
-                    option.value = user.public_id;
+                    option.value = user._id;
                     option.textContent = `${user.name}`;
                     borrowUserSelect.appendChild(option);
                 }
@@ -576,7 +576,7 @@
             const availableBooks = currentBooks.filter(book => (book.available_quantity > 0));
             availableBooks.forEach(book => {
                 const option = document.createElement('option');
-                option.value = book.uuid;
+                option.value = book._id;
                 option.textContent = `${book.title} (${book.available_quantity} available)`;
                 borrowBookSelect.appendChild(option);
             });
@@ -635,7 +635,7 @@
                  if (query) {
                     if (query.includes('@') || (query.length > 4 && (query.includes('-') || !isNaN(query.substring(0,4))))) {
                         if (query.includes('@')) queryParams.email = query;
-                        else queryParams.public_id = query;
+                        else queryParams._id = query;
                         debouncedUserSearch(queryParams);
                     } else {
                         const filtered = allUsers.filter(user => user.name.toLowerCase().includes(query.toLowerCase()));
@@ -652,15 +652,15 @@
                 let userId = borrowUserSelect.value;
                 if (!userId && borrowUserInput.value) {
                     const inputValue = borrowUserInput.value.trim();
-                    const user = allUsers.find(u => u.public_id === inputValue || u.email === inputValue);
-                    userId = user ? user.public_id : null;
+                    const user = allUsers.find(u => u._id === inputValue || u.email === inputValue);
+                    userId = user ? user._id : null;
                 }
                 
                 let bookId = borrowBookSelect.value;
                 if (!bookId && borrowBookInput.value) {
                     const inputValue = borrowBookInput.value.trim();
-                    const book = currentBooks.find(b => b.isbn === inputValue || b.uuid === inputValue);
-                    bookId = book ? book.uuid : null;
+                    const book = currentBooks.find(b => b.isbn === inputValue || b._id === inputValue);
+                    bookId = book ? book._id : null;
                 }
                 
                 if (!userId || !bookId) {
@@ -671,8 +671,8 @@
                 borrowSubmitBtn.disabled = true;
                 try {
                     const borrowData = {
-                        public_id: userId,
-                        books: [{ uuid: bookId }]
+                        _id: userId,
+                        books: [{ _id: bookId }]
                     };
                     await apiRequest('/borrow', 'POST', borrowData, 'Book borrowed successfully');
                     borrowForm.reset();
@@ -716,17 +716,17 @@
                     });
                 }
                 if (target.classList.contains('delete-book-btn')) {
-                    const uuid = target.dataset.uuid;
+                    const _id = target.dataset._id;
                     openConfirmationModal('This will permanently delete the book.', async () => {
-                         await apiRequest('/books', 'DELETE', { uuid }, 'Book deleted successfully');
-                        const cardToRemove = booksListEl.querySelector(`[data-book-uuid="${uuid}"]`);
+                         await apiRequest('/books', 'DELETE', { _id }, 'Book deleted successfully');
+                        const cardToRemove = booksListEl.querySelector(`[data-book-_id="${_id}"]`);
                         if (cardToRemove) {
                             cardToRemove.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                             cardToRemove.style.opacity = '0';
                             cardToRemove.style.transform = 'scale(0.95)';
                             setTimeout(() => {
                                 cardToRemove.remove();
-                                currentBooks = currentBooks.filter(book => book.uuid !== uuid);
+                                currentBooks = currentBooks.filter(book => book._id !== _id);
                                 totalBooksStat.textContent = currentBooks.length;
                                 updateBorrowUI();
                                 if (currentBooks.length === 0) {
@@ -747,9 +747,9 @@
                     });
                 }
                 if (target.classList.contains('edit-book-btn')) {
-                     const uuid = target.dataset.uuid;
+                     const _id = target.dataset._id;
                     try {
-                        const bookData = await apiRequest(`/books?uuid=${uuid}`, 'GET');
+                        const bookData = await apiRequest(`/books?_id=${_id}`, 'GET');
                         const bookToEdit = bookData[0];
                         if (!bookToEdit) return showNotification('Could not find book details to edit.', true);
                         
@@ -770,7 +770,7 @@
                                 }
                             }
                             if (edit_book_stack.length === 0) return showNotification('No changes were made.', false);
-                            await apiRequest('/books', 'PATCH', { uuid, edit_book_stack }, 'Book updated successfully').then(() => fetchAndRenderBooks());
+                            await apiRequest('/books', 'PATCH', { _id, edit_book_stack }, 'Book updated successfully').then(() => fetchAndRenderBooks());
                         });
                     } catch(err) { console.error("Failed to open edit modal:", err); }
                 }
