@@ -1,4 +1,4 @@
-import db, { pgp } from "./db.js";
+import db, { pgp } from "./db.mjs";
 /*
     CUD_books model handles
     CREATE, UPDATE and DELETE requests from the controller

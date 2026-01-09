@@ -4,7 +4,7 @@
     borrowTransaction -- Inserts new borrow logs in a safe transaction.
 
 */
-import db, { pgp } from "./db.js";
+import db, { pgp } from "./db.mjs";
 /**
  * checks for any due or overdue directly in the database
  * @param {string} public_id - receives user id from the borrow controller

@@ -1,4 +1,4 @@
-import db, { pgp } from './db.js';
+import db, { pgp } from './db.mjs';
 
 export default async function closeBorrowLogs(transactionIds) {
     const query = `

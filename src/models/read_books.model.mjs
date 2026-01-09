@@ -1,4 +1,4 @@
-import db from "./db.js";
+import db from "./db.mjs";
 
 /**
  * Finds books, calculates borrowed/available counts, and aggregates active loan details into a nested JSON array.
