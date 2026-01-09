@@ -1,5 +1,5 @@
 import express from "express";
-import user_router from "./src/routes/user.routes.ts";
+import user_router from "./src/routes/user.routes.mjs";
 import book_router from "./src/routes/book.routes.mjs";
 import borrow_router from "./src/routes/borrow.routes.mjs";
 import return_router from "./src/routes/return.routes.mjs";

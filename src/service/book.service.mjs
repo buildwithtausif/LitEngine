@@ -1,5 +1,5 @@
 import { editBooks } from "../models/cud_books.model.mjs";
-import db from "../models/db.js";
+import db from "../models/db.mjs";
 /***
  * Service function to handle the business logic for updating a book's details.
  * It validates identifiers, filters out protected columns, and then calls the

@@ -1,5 +1,5 @@
-import recordExist from "../utils/dbUtils.model.js";
-import { generateUuid } from "../service/id_service.js";
+import recordExist from "../utils/dbUtils.model.mjs";
+import { generateUuid } from "../service/id_service.mjs";
 import {
   checkDueOrOverdue,
   getBorrowedCountForBook,

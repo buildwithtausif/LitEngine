@@ -4,8 +4,8 @@
 */
 
 import find_books from "../models/read_books.model.mjs";
-import recordExist from "../utils/dbUtils.model.js";
-import { generateUuid } from "../service/id_service.js";
+import recordExist from "../utils/dbUtils.model.mjs";
+import { generateUuid } from "../service/id_service.mjs";
 import { insertBooks } from "../models/cud_books.model.mjs";
 import {
   updateBookService,
