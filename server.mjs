@@ -3,6 +3,7 @@ import user_router from "./src/routes/user.routes.mjs";
 import book_router from "./src/routes/book.routes.mjs";
 import borrow_router from "./src/routes/borrow.routes.mjs";
 import return_router from "./src/routes/return.routes.mjs";
+import inventory_router from "./src/routes/inventory.routes";
 // create an express-server
 const server = express();
 // the middleware issue :'( earlier I've not included it coz, was not getting it but now ik
@@ -16,6 +17,7 @@ server.use("/api/users", user_router);
 server.use("/api/books", book_router);
 server.use("/api/borrow", borrow_router);
 server.use("/api/return", return_router);
+server.use("/api/inventory", inventory_router); 
 // start the server
 server.listen(port, () => {
   console.log(`express-server is running at host:${port}`);

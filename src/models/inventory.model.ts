@@ -13,7 +13,7 @@ interface Inventory {
   updated_at: Date;
   deleted_at: Date | null;
 }
-export default class inventoryHandler {
+export default class inventoryModel {
   constructor(
     public _id?: UUID,
     public bookid?: UUID,
