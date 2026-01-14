@@ -48,8 +48,6 @@ Defaults to `http://localhost:8000` (or as configured).
 
 ### Endpoints
 
-### Endpoints
-
 #### 📚 Books (`/api/books`)
 
 Manage the library's book collection.
