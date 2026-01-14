@@ -13,8 +13,7 @@ const borrowBooks = async (req, res) => {
     const { user_id, books } = req.body;
     if (!user_id || !books || (Array.isArray(books) && books.length === 0)) {
       return res.status(400).json({
-        error:
-          "Bad Request: user_id and a non-empty books array are required.",
+        error: "Bad Request: user_id and a non-empty books array are required.",
       });
     }
     // check if the user exist in db
@@ -32,7 +31,7 @@ const borrowBooks = async (req, res) => {
     }
     // Check if user is soft-deleted
     if (userExist.deleted_at) {
-        return res
+      return res
         .status(404)
         .json({ error: "User not found or has been deleted." });
     }
@@ -78,7 +77,10 @@ const borrowBooks = async (req, res) => {
       if (!bookDetails) {
         return res
           .status(400)
-          .json({ error: "Invalid bookid provided", provided: `${entry.bookid}` });
+          .json({
+            error: "Invalid bookid provided",
+            provided: `${entry.bookid}`,
+          });
       }
       // check for book availability
       const borrowedCount = await getBorrowedCountForBook(bookDetails._id);
@@ -107,15 +109,15 @@ const borrowBooks = async (req, res) => {
       });
     } else {
       // FAILURE
-      console.error(
-        "Database transaction failed for user:",
-        userExist._id
-      ); // Good for logging
+      console.error("Database transaction failed for user:", userExist._id); // Good for logging
       return res.status(500).json({
-        error: "Failed to complete the borrow transaction"
+        error: "Failed to complete the borrow transaction",
       });
     }
   } catch (err) {
+    if (err.message && err.message.includes("Conflict")) {
+      return res.status(409).json({ error: err.message });
+    }
     console.error("Error in borrowBooks controller:", err);
     return res.status(500).json({
       error: "Something went wrong on our side. Please try again later ",
