@@ -8,6 +8,7 @@ import {
 } from "../models/users.model.mjs";
 import recordExist from "../utils/dbUtils.model.mjs";
 import generatePublicId from "../service/id_service.mjs";
+import { checkDueOrOverdue } from "../models/borrow.model.mjs";
 
 // Create
 const reg_newuser = async (req, res) => {
@@ -204,6 +205,16 @@ const update_user = async (req, res) => {
 const delete_user = async (req, res) => {
   try {
     const { user_id } = req.params;
+    
+    // Check for active loans
+    const { alldues } = await checkDueOrOverdue(user_id);
+    if (alldues && alldues.length > 0) {
+      return res.status(409).json({
+        error: "Cannot delete user. The user has active book loans. Please return all books first.",
+        active_loans: alldues.length
+      });
+    }
+
     const deleted_user = await softDelete(user_id);
     // if user is found and deleted show 200 ok else 404 no user found with associated id
     if (deleted_user) {

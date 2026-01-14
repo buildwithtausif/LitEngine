@@ -25,13 +25,15 @@ export default async function find_books(criteria = {}) {
   let paramIndex = 1;
 
   // Safely iterate over criteria properties.
-  Object.keys(criteria).forEach(key => {
+  Object.keys(criteria).forEach((key) => {
     const value = criteria[key];
-    if (['title', 'author', 'genre', 'publisher'].includes(key)) {
+    if (["title", "author", "genre", "publisher"].includes(key)) {
       conditions.push(`b.${key} ILIKE $${paramIndex++}`);
       values.push(`%${value}%`);
-    } else if (['_id', 'isbn'].includes(key)) {
-      conditions.push(`b.${key} = $${paramIndex++}`);
+    } else if (["_id", "id", "isbn"].includes(key)) {
+      // Map 'id' to '_id' column
+      const dbColumn = key === "id" ? "_id" : key;
+      conditions.push(`b.${dbColumn} = $${paramIndex++}`);
       values.push(value);
     }
   });
@@ -39,7 +41,7 @@ export default async function find_books(criteria = {}) {
   if (conditions.length > 0) {
     query += ` WHERE ${conditions.join(" AND ")}`;
   }
-  
+
   query += " ORDER BY b.title ASC;";
 
   try {

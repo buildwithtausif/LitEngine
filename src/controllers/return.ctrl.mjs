@@ -1,4 +1,4 @@
-import closeBorrowLogs from "../models/return.model.mjs";
+import { closeBorrowLogs } from "../models/return.model.mjs";
 
 const returnBooks = async (req, res) => {
     // Ensure the body is an array of objects and not empty.
