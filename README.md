@@ -34,7 +34,7 @@
     # Development
     npm run dev
 
-    # Production
+    # Production (not recommended, typescript migration is in progress)
     npm start
     ```
 
