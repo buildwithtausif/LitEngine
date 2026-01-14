@@ -10,18 +10,19 @@ const borrowBooks = async (req, res) => {
   try {
     // get identifier and book-set (which is to be borrowed)
     // from request body
-    const { public_id, books } = req.body;
-    if (!public_id || !books || (Array.isArray(books) && books.length === 0)) {
+    const { user_id, books } = req.body;
+    if (!user_id || !books || (Array.isArray(books) && books.length === 0)) {
       return res.status(400).json({
         error:
-          "Bad Request: public_id and a non-empty books array are required.",
+          "Bad Request: user_id and a non-empty books array are required.",
       });
     }
     // check if the user exist in db
     const userExist = await recordExist({
+      schema: "library",
       tableName: "users",
-      colName: "public_id",
-      value: public_id,
+      colName: "_id",
+      value: user_id,
       returnRow: true,
     });
     if (!userExist) {
@@ -29,8 +30,14 @@ const borrowBooks = async (req, res) => {
         .status(404)
         .json({ error: "no user found with the provided id" });
     }
+    // Check if user is soft-deleted
+    if (userExist.deleted_at) {
+        return res
+        .status(404)
+        .json({ error: "User not found or has been deleted." });
+    }
     // RULE A: Check for overdue books first.
-    const dues = await checkDueOrOverdue(public_id);
+    const dues = await checkDueOrOverdue(user_id);
     if (dues.overdue && dues.overdue.length > 0) {
       return res.status(409).json({
         error:
@@ -44,7 +51,7 @@ const borrowBooks = async (req, res) => {
       : [req.body.books];
     // check if any book is issued already if it is then how many if 1 then only possible borrows is 2 and if max=3 no borrows
     const currentBorrowsCount = dues.alldues ? dues.alldues.length : 0;
-    if (entries.length + currentBorrowsCount > 3) {
+    if (entries.length + currentBorrowsCount >= 3) {
       return res.status(409).json({
         error: `You are trying to borrow ${
           entries.length
@@ -62,18 +69,19 @@ const borrowBooks = async (req, res) => {
     dueDate.setDate(borrowDate.getDate() + 14);
     for (const entry of entries) {
       const bookDetails = await recordExist({
-        tableName: "books",
-        colName: "uuid",
-        value: entry.uuid,
+        schema: "library",
+        tableName: "inventory",
+        colName: "bookid",
+        value: entry.bookid,
         returnRow: true,
       });
       if (!bookDetails) {
         return res
           .status(400)
-          .json({ error: "Invalid book UUID provided", provided: `${entry.uuid}` });
+          .json({ error: "Invalid bookid provided", provided: `${entry.bookid}` });
       }
       // check for book availability
-      const borrowedCount = await getBorrowedCountForBook(entry.uuid);
+      const borrowedCount = await getBorrowedCountForBook(bookDetails._id);
       if (borrowedCount >= bookDetails.quantity) {
         return res.status(409).json({
           error: `Conflict: All copies of '${bookDetails.title}' are currently borrowed.`,
@@ -81,11 +89,11 @@ const borrowBooks = async (req, res) => {
       }
       // generate transaction scheme
       newBorrowings.push({
-        transaction_id: generateUuid(),
-        user_id: public_id,
-        book_id: entry.uuid,
-        borrow_date: borrowDate,
-        due_date: dueDate,
+        _id: generateUuid(),
+        loaned_to: user_id,
+        loaned_item: bookDetails._id, // Fixed: Use inventory ID from DB, not undefined entry.uuid
+        loaned_at: borrowDate,
+        due_by: dueDate,
       });
     }
     // trigger a transaction
@@ -94,17 +102,17 @@ const borrowBooks = async (req, res) => {
     if (newTransaction) {
       // SUCCESS
       return res.status(201).json({
-        message: `Books successfully issued to ${userExist.name} (ID: ${userExist.public_id})`,
+        message: `Books successfully issued to ${userExist.name} (ID: ${userExist._id})`,
         data: newTransaction,
       });
     } else {
       // FAILURE
       console.error(
         "Database transaction failed for user:",
-        userExist.public_id
+        userExist._id
       ); // Good for logging
       return res.status(500).json({
-        error: "Failed to complete the borrow transaction in the database.",
+        error: "Failed to complete the borrow transaction"
       });
     }
   } catch (err) {

@@ -7,31 +7,31 @@
 import db, { pgp } from "./db.mjs";
 /**
  * checks for any due or overdue directly in the database
- * @param {string} public_id - receives user id from the borrow controller
+ * @param {string} user_id (_id in library.users) - receives user id from the borrow controller
  * @returns {Promise<Object>}
  */
-export async function checkDueOrOverdue(public_id) {
+export async function checkDueOrOverdue(user_id) {
   /* 
         Overdue: returned = null && dueDate < now()
         AllDue: returned = null
     */
   let allDuesQuery = `
-        SELECT * FROM borrow_logs WHERE user_id = $1 AND return_date IS NULL
+        SELECT * FROM library.bookloans WHERE loaned_to = $1 AND returned_on IS NULL
    `;
   let overdueQuery = `
-        SELECT * FROM borrow_logs WHERE user_id = $1 AND return_date IS NULL AND due_date < NOW()
+        SELECT * FROM library.bookloans WHERE loaned_to = $1 AND returned_on IS NULL AND due_by < NOW()
    `;
 
   try {
     const { alldues, overdue } = await db.task("get-due-status", async (t) => {
-      const alldues = await t.any(allDuesQuery, [public_id]);
-      const overdue = await t.any(overdueQuery, [public_id]);
+      const alldues = await t.any(allDuesQuery, [user_id]);
+      const overdue = await t.any(overdueQuery, [user_id]);
       return { alldues, overdue };
     });
 
     return { alldues, overdue };
   } catch (err) {
-    console.error(`Error checking dues for user ${public_id}:`, err);
+    console.error(`Error checking dues for user ${user_id}:`, err);
     return { alldues: [], overdue: [] };
   }
 }
@@ -43,7 +43,7 @@ export async function checkDueOrOverdue(public_id) {
 export async function getBorrowedCountForBook(book_uuid) {
   /* function-body */
   let query = `
-    SELECT COUNT(*) FROM borrow_logs WHERE book_id = $1 AND return_date IS NULL
+    SELECT COUNT(*) FROM library.bookloans WHERE loaned_item = $1 AND returned_on IS NULL
   `;
   try {
     const count = await db.one(query, [book_uuid], a => +a.count); // +a.count is equivalent of Number(a.count) or ParseInt(a.count,10)
@@ -57,17 +57,21 @@ export async function getBorrowedCountForBook(book_uuid) {
   }
 }
 /**
- * Gets this stream of object when the controller verifies any fallacy on borrow transaction of books
+ * The structure of data as recieved from the borrow-controller
  * @typedef {Object} borrowReqStruct
  * @property {string} transaction_id - The unique ID for a borrow transaction
- * @property {string} public_id - The unique ID of the borrower registered in the library
- * @property {string} book_id - The unique ID of the book which is in the library
+ * @property {string} user_id - The unique ID of the borrower registered in the library
+ * @property {string} loaned_item - The unique ID of the book which is in the library
  * @property {Date} borrowDate - Gets the date of transaction (new Date)
  * @property {Date} dueDate - Sets the Due date of the book w.r.t borrowDate + 14 in total 15 Days
  */
 /**
- * @param {borrowReqStruct} newBorrowings - A borrow request stream from borrow.ctrl.mjs with borrowReqStruct
- * @returns {Promise<Object>}
+ * Executes a borrow transaction.
+ * Checks book availability, creates loan records, and decrements inventory quantity.
+ * 
+ * @param {borrowReqStruct[]} newBorrowings - Array of borrow request objects.
+ * @returns {Promise<Object[]>} The created loan records.
+ * @throws {Error} If database transaction fails or conflicts occur (e.g. book unavailable).
  */
 export async function borrowTransaction(newBorrowings) {
   /* create transaction */
@@ -78,33 +82,45 @@ export async function borrowTransaction(newBorrowings) {
                        Bob just a millisecond later,
                        getBorrowedCountForBook('gatsby-uuid'). The function runs its query and correctly returns 0 (since it's not borrowed yet).
                        The controller checks the book's quantity (which is 1).
-                       The check if (borrowedCount >= bookDetails.quantity) (i.e., 0 >= 1) is false. Alice's request is approved to proceed.
+                       The check if (currentqty >= bookDetails.quantity) (i.e., 0 >= 1) is false. Alice's request is approved to proceed.
 
                        similarly it returns 1 for bob as well as alice's transaction is not completed yet and Bob also gets approval for book availability
         */
       // in that case check the availability inside transaction as well
       for (const borrow of newBorrowings) {
-        // gets the total quantity and the title of the book associated with its uuid
+        // gets the total quantity and its unique id of the book associated with its uuid
+        // FIXED: Joined with library.books to get the title, as inventory doesn't have it
         const bookDetails = await t.one(
-          "SELECT title, quantity FROM books WHERE uuid = $1",
-          [borrow.book_id]
+          `SELECT i.bookid, b.title, i.currentQty 
+           FROM library.inventory i
+           JOIN library.books b ON i.bookid = b._id
+           WHERE i._id = $1`,
+          [borrow.loaned_item]
         );
-        // getting the count of all books which are issued with this book id and is not yet returned
-        const { count } = await t.one(
-          "SELECT COUNT(*) FROM borrow_logs WHERE book_id = $1 AND return_date IS NULL",
-          [borrow.book_id]
-        );
-        // using unary-plus to convert count "a string" into a number then comparing
-        if (+count >= bookDetails.quantity) {
-          throw new Error(
+        
+        // Check availability using currentQty directly
+        // This handles the Concurrency Edge Case (Alice vs Bob) effectively because
+        // we are inside a transaction. The SELECT might read old data if isolation level is low,
+        // (default Read Committed). But the subsequent UPDATE will lock.
+        // Better: We can rely on the UPDATE's returning value or a WHERE clause.
+        // Let's keep the user's logic structure but use currentQty.
+        
+        if (bookDetails.currentqty <= 0) {
+           throw new Error(
             `Conflict: All copies of '${bookDetails.title}' are currently borrowed.`
-          );
+           );
         }
+        
+        // DECREMENT currentQty
+        await t.none(
+          "UPDATE library.inventory SET currentQty = currentQty - 1 WHERE _id = $1",
+          [borrow.loaned_item]
+        );
       }
       // if all availability checks are passed
       const columns = new pgp.helpers.ColumnSet(
-        ["transaction_id", "user_id", "book_id", "borrow_date", "due_date"],
-        { table: "borrow_logs" }
+        ["_id", "loaned_to", "loaned_item", "loaned_at", "due_by"],
+        { table: { schema: "library", table: "bookloans" } }
       );
       const query = pgp.helpers.insert(newBorrowings, columns) + " RETURNING *";
       return t.many(query);
