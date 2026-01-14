@@ -1,0 +1,1022 @@
+[
+  {
+    "_id": "1dbf3308-e125-432f-9485-04770679b438",
+    "title": "1984",
+    "author": "George Orwell",
+    "publisher": "Signet Classic",
+    "genre": "English Literature",
+    "isbn": "9780451524935",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "eaa6fd7a-ffe3-4801-90aa-955a1c4cb183",
+    "title": "2 States",
+    "author": "Chetan Bhagat",
+    "publisher": "Rupa Publications",
+    "genre": "Romance Novels",
+    "isbn": "9788129115300",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T13:04:59.245Z"
+  },
+  {
+    "_id": "52b99b5c-2091-40eb-a455-2f8e1160248f",
+    "title": "A Short History of Nearly Everything",
+    "author": "Bill Bryson",
+    "publisher": "Broadway Books",
+    "genre": "History",
+    "isbn": "9780767908184",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "485339f8-7933-48de-a3a9-3eb4317b7b37",
+    "title": "A Thousand Splendid Suns",
+    "author": "Khaled Hosseini",
+    "publisher": "Riverhead Books",
+    "genre": "Fiction",
+    "isbn": "9781594483851",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "4ba22e98-2a2f-4300-a246-9f164a5b7fdb",
+    "title": "Alice's Adventures in Wonderland",
+    "author": "Lewis Carroll",
+    "publisher": "Penguin Classics",
+    "genre": "Children's Book",
+    "isbn": "9780141439761",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "0017cd3f-43b2-4643-a9e3-fe1aae2b8a61",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "publisher": "Avery",
+    "genre": "Self-Help",
+    "isbn": "9780735211292",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "d234b86f-040e-40c6-8863-210a1d9df7bf",
+    "title": "Before I Go to Sleep",
+    "author": "S.J. Watson",
+    "publisher": "Harper Perennial",
+    "genre": "Adult",
+    "isbn": "9780062060560",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "e52965d8-3338-4aa4-a573-5678d93e42ad",
+    "title": "Beyond Good and Evil",
+    "author": "Friedrich Nietzsche",
+    "publisher": "Penguin Classics",
+    "genre": "Philosophy",
+    "isbn": "9780140449273",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "f9a8efb4-741a-4844-820b-6e6ed3ce8f59",
+    "title": "Big Little Lies",
+    "author": "Liane Moriarty",
+    "publisher": "G.P. Putnam's Sons",
+    "genre": "Adult",
+    "isbn": "9780425274866",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "2440ff08-dc85-4561-85a2-3b4746cc6568",
+    "title": "Caesar's Last Breath",
+    "author": "Sam Kean",
+    "publisher": "Little, Brown and Company",
+    "genre": "Chemistry",
+    "isbn": "9780316315258",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "5b518b52-2ede-4a24-9cf3-62da0fb05194",
+    "title": "Can't Hurt Me",
+    "author": "David Goggins",
+    "publisher": "Lioncrest Publishing",
+    "genre": "Self-Help",
+    "isbn": "9781544512273",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "d6ca3a6f-10f6-47c7-b1df-20c1666d83e5",
+    "title": "Certificate Physical and Human Geography",
+    "author": "G.C. Leong",
+    "publisher": "Oxford University Press",
+    "genre": "Geography",
+    "isbn": "9780199395279",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "0ba0b968-6040-4cf8-b5f8-08158c323498",
+    "title": "Charlie and the Chocolate Factory",
+    "author": "Roald Dahl",
+    "publisher": "Puffin Books",
+    "genre": "Children's Book",
+    "isbn": "9780142410318",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "b63e07ab-c6e4-44bd-aa86-f10fa4d13c14",
+    "title": "Charlotte's Web",
+    "author": "E.B. White",
+    "publisher": "HarperCollins",
+    "genre": "Children's Book",
+    "isbn": "9780064400558",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "0c37608e-ac9c-4196-80cf-721b2177359b",
+    "title": "Collapse: How Societies Choose to Fail or Succeed",
+    "author": "Jared Diamond",
+    "publisher": "Penguin Books",
+    "genre": "Geography",
+    "isbn": "9780143117003",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "dc5d1b1e-3c7d-4794-b36d-e52a1588897a",
+    "title": "Deep Work",
+    "author": "Cal Newport",
+    "publisher": "Grand Central Publishing",
+    "genre": "Business",
+    "isbn": "9781455586691",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "98483b49-36b9-4f2c-b4f7-a63830aafb4b",
+    "title": "Freedom at Midnight",
+    "author": "Dominique Lapierre & Larry Collins",
+    "publisher": "Vikas Publishing House",
+    "genre": "History",
+    "isbn": "9780706990422",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "64f45f10-2a86-47c2-9941-02139354873b",
+    "title": "Godan",
+    "author": "Munshi Premchand",
+    "publisher": "Rajkamal Prakashan",
+    "genre": "Hindi Literature",
+    "isbn": "9788126711993",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "575cc16c-a6fb-4b8e-85ca-d2c2fe55265f",
+    "title": "Gone Girl",
+    "author": "Gillian Flynn",
+    "publisher": "Crown",
+    "genre": "Adult",
+    "isbn": "9780307588371",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "30f32903-4dcf-44ec-8765-13c8217cf811",
+    "title": "Good to Great",
+    "author": "Jim Collins",
+    "publisher": "Harper Business",
+    "genre": "Business",
+    "isbn": "9780066620992",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "c219d2b1-d631-4d9e-a723-53766c1004a6",
+    "title": "Great Expectations",
+    "author": "Charles Dickens",
+    "publisher": "Penguin Classics",
+    "genre": "English Literature",
+    "isbn": "9780141439563",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "aebdd977-9712-4d46-a80d-90f9b952d782",
+    "title": "Gunaho Ka Devta",
+    "author": "Dharamvir Bharati",
+    "publisher": "Rajkamal Prakashan",
+    "genre": "Hindi Literature",
+    "isbn": "9788126717148",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "806e8de1-09d2-4229-8188-0a79cb890060",
+    "title": "Guns, Germs, and Steel",
+    "author": "Jared Diamond",
+    "publisher": "W. W. Norton & Company",
+    "genre": "History",
+    "isbn": "9780393317558",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "814c7165-91a7-4f16-b3cf-2a254db5e526",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "publisher": "Scholastic",
+    "genre": "Children's Book",
+    "isbn": "9780590353427",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "719a2101-64eb-4015-a60e-5d5cec1e43ca",
+    "title": "How to Win Friends and Influence People",
+    "author": "Dale Carnegie",
+    "publisher": "Gallery Books",
+    "genre": "Self-Help",
+    "isbn": "9780671027032",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "2a008aea-6cd8-4722-9363-b3342e4c73fe",
+    "title": "Ignition!",
+    "author": "John D. Clark",
+    "publisher": "Rutgers University Press",
+    "genre": "Chemistry",
+    "isbn": "9780813595832",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "27faf223-e41e-437e-aa90-5a7f03a28915",
+    "title": "Ikigai: The Japanese Secret to a Long and Happy Life",
+    "author": "Héctor García & Francesc Miralles",
+    "publisher": "Penguin Life",
+    "genre": "Self-Help",
+    "isbn": "9780143130727",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "db0cb46f-af6e-454f-93a9-cf8d079386a3",
+    "title": "India After Gandhi",
+    "author": "Ramachandra Guha",
+    "publisher": "Picador",
+    "genre": "History",
+    "isbn": "9780330540209",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "26c75792-c52c-4931-85a4-bb4e62d956ea",
+    "title": "Influence: The Psychology of Persuasion",
+    "author": "Robert Cialdini",
+    "publisher": "Harper Business",
+    "genre": "Business",
+    "isbn": "9780061241895",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "b3b138df-63bc-4001-b0cd-b46c1d9b3a17",
+    "title": "It Ends with Us",
+    "author": "Colleen Hoover",
+    "publisher": "Atria Books",
+    "genre": "Romance Novels",
+    "isbn": "9781501110368",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "a68df42f-c683-47d9-b753-5d446499b8a7",
+    "title": "Jane Eyre",
+    "author": "Charlotte Brontë",
+    "publisher": "Penguin Classics",
+    "genre": "English Literature",
+    "isbn": "9780141441146",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "2b6e08cf-757c-49f9-b5bf-4e9920f16a6c",
+    "title": "Kitne Pakistan",
+    "author": "Kamleshwar",
+    "publisher": "Rajpal & Sons",
+    "genre": "Hindi Literature",
+    "isbn": "9788170284418",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "de13d102-8a47-459f-b6e6-a01c7fe8c649",
+    "title": "Life of Pi",
+    "author": "Yann Martel",
+    "publisher": "Harcourt",
+    "genre": "Fiction",
+    "isbn": "9780156027328",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "08fd7323-d8c7-4cc3-9909-c5d76d09be5c",
+    "title": "Longitude",
+    "author": "Dava Sobel",
+    "publisher": "Walker & Company",
+    "genre": "Geography",
+    "isbn": "9780802715296",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "2feaa6a5-93f2-4512-a630-8dea0de703ce",
+    "title": "Madhushala",
+    "author": "Harivansh Rai Bachchan",
+    "publisher": "Rajpal & Sons",
+    "genre": "Hindi Literature",
+    "isbn": "9788170288676",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "dbfb79ac-a181-4bca-9cb2-bb7b0c442b1b",
+    "title": "Maila Aanchal",
+    "author": "Phanishwar Nath Renu",
+    "publisher": "Rajkamal Prakashan",
+    "genre": "Hindi Literature",
+    "isbn": "9788126704940",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "40b50c31-d62b-4373-8aea-38f6525ea28c",
+    "title": "Maphead",
+    "author": "Ken Jennings",
+    "publisher": "Scribner",
+    "genre": "Geography",
+    "isbn": "9781451640038",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "20ba1ba6-2040-44dd-949c-0f28ee5721dd",
+    "title": "Matilda",
+    "author": "Roald Dahl",
+    "publisher": "Puffin Books",
+    "genre": "Children's Book",
+    "isbn": "9780141301068",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "b4699107-8bf8-4e31-a978-e4af35169d04",
+    "title": "Me Before You",
+    "author": "Jojo Moyes",
+    "publisher": "Penguin Books",
+    "genre": "Romance Novels",
+    "isbn": "9780143124542",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "fc8857b8-4131-4902-bb2a-f5f0630c077a",
+    "title": "Midnight's Children",
+    "author": "Salman Rushdie",
+    "publisher": "Random House Trade Paperbacks",
+    "genre": "Fiction",
+    "isbn": "9780812976533",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "6d5e1e22-b14f-49bc-8e80-5982fb933dd0",
+    "title": "Mindset: The New Psychology of Success",
+    "author": "Carol S. Dweck",
+    "publisher": "Ballantine Books",
+    "genre": "Self-Help",
+    "isbn": "9780345472328",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "17eb1030-dcd7-4351-811a-1d3b3efa32ca",
+    "title": "Moby Dick",
+    "author": "Herman Melville",
+    "publisher": "Penguin Classics",
+    "genre": "English Literature",
+    "isbn": "9780142437247",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "a3a97253-9c95-466c-871e-2fda89a3eecf",
+    "title": "Molecules",
+    "author": "Theodore Gray",
+    "publisher": "Black Dog & Leventhal",
+    "genre": "Chemistry",
+    "isbn": "9781579129712",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "b9c31c42-7c2f-4db7-8a58-1ef8e90f6a3c",
+    "title": "Napoleon's Buttons",
+    "author": "Penny Le Couteur",
+    "publisher": "TarcherPerigee",
+    "genre": "Chemistry",
+    "isbn": "9781585423316",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "85ef3c13-46ba-41a4-aa30-4977060674f3",
+    "title": "Outlander",
+    "author": "Diana Gabaldon",
+    "publisher": "Dell",
+    "genre": "Romance Novels",
+    "isbn": "9780440212560",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "8a03493f-e11c-49da-8d67-1f22873cd0da",
+    "title": "Periodic Tales",
+    "author": "Hugh Aldersey-Williams",
+    "publisher": "Ecco",
+    "genre": "Chemistry",
+    "isbn": "9780062024845",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "70ab03ce-2736-47df-a711-69ce72c94bea",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "publisher": "Penguin Classics",
+    "genre": "English Literature",
+    "isbn": "9780141439518",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "90b8ab06-1cb9-40a8-8579-6bc978985cf3",
+    "title": "Prisoners of Geography",
+    "author": "Tim Marshall",
+    "publisher": "Elliott & Thompson",
+    "genre": "Geography",
+    "isbn": "9781783962433",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "edbc4509-2bbd-4c0b-8faa-0c20bdc092d9",
+    "title": "Raag Darbari",
+    "author": "Shrilal Shukla",
+    "publisher": "Rajkamal Prakashan",
+    "genre": "Hindi Literature",
+    "isbn": "9788126705299",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "011e1fa8-5c7a-4bb8-a6e3-692452766ebc",
+    "title": "Rashmirathi",
+    "author": "Ramdhari Singh Dinkar",
+    "publisher": "Rajpal & Sons",
+    "genre": "Hindi Literature",
+    "isbn": "9788170283084",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "10ea7b97-0dd9-4459-8c43-10c25de0867c",
+    "title": "Red, White & Royal Blue",
+    "author": "Casey McQuiston",
+    "publisher": "St. Martin's Griffin",
+    "genre": "Romance Novels",
+    "isbn": "9781250316776",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "17732629-f0c6-4b0b-b045-ae11b04dff7e",
+    "title": "Revenge of Geography",
+    "author": "Robert D. Kaplan",
+    "publisher": "Random House",
+    "genre": "Geography",
+    "isbn": "9780812982220",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "72a62a15-30b5-4046-b204-0955331aba4e",
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "publisher": "Plata Publishing",
+    "genre": "Business",
+    "isbn": "9781612680194",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "eec2f8bd-36b1-409d-84c8-f32572b922ba",
+    "title": "Sankalit Kahaniyan (Premchand)",
+    "author": "Munshi Premchand",
+    "publisher": "National Book Trust",
+    "genre": "Hindi Literature",
+    "isbn": "9788123754659",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "9a76bbc6-1f8c-4e6a-b743-87eb187a108f",
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Yuval Noah Harari",
+    "publisher": "Harper",
+    "genre": "History",
+    "isbn": "9780062316097",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "cecd0371-01c1-4e71-a21a-d621c4a21bd0",
+    "title": "Sharp Objects",
+    "author": "Gillian Flynn",
+    "publisher": "Broadway Books",
+    "genre": "Adult",
+    "isbn": "9780307341556",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "acf8d5a7-03b5-4086-ba08-76c3e66c3a19",
+    "title": "Shoe Dog",
+    "author": "Phil Knight",
+    "publisher": "Scribner",
+    "genre": "Business",
+    "isbn": "9781501135910",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "3c573d93-ad25-46b3-95fa-d407516f2df2",
+    "title": "Start With Why",
+    "author": "Simon Sinek",
+    "publisher": "Portfolio",
+    "genre": "Self-Help",
+    "isbn": "9781591846444",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "4c337da9-4757-4783-8c3e-87de679fbd14",
+    "title": "Stuff Matters",
+    "author": "Mark Miodownik",
+    "publisher": "Houghton Mifflin Harcourt",
+    "genre": "Chemistry",
+    "isbn": "9780544236042",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "746dbc4d-eaa0-4cbb-8770-28015abd7f09",
+    "title": "Tamas",
+    "author": "Bhisham Sahni",
+    "publisher": "Rajkamal Prakashan",
+    "genre": "Hindi Literature",
+    "isbn": "9788126715106",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "7bf7a4da-90a7-4699-a1ff-85f23695177f",
+    "title": "The 7 Habits of Highly Effective People",
+    "author": "Stephen Covey",
+    "publisher": "Simon & Schuster",
+    "genre": "Self-Help",
+    "isbn": "9781982137274",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "8168640c-9930-4ede-bbc0-2f0d216dc51e",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "publisher": "HarperOne",
+    "genre": "Fiction",
+    "isbn": "9780061122415",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "4918d52c-1076-4792-b168-c2460792255f",
+    "title": "The Argumentative Indian",
+    "author": "Amartya Sen",
+    "publisher": "Penguin Books",
+    "genre": "History",
+    "isbn": "9780141012117",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "173648cb-decc-46b6-8e5b-47291d12204b",
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "publisher": "Anchor",
+    "genre": "Adult",
+    "isbn": "9780307474278",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "13776a06-6f14-4b57-ad80-e3c95aa1ffa5",
+    "title": "The Diary of a Young Girl",
+    "author": "Anne Frank",
+    "publisher": "Bantam",
+    "genre": "History",
+    "isbn": "9780553296983",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "8fe57edb-56c1-4df8-a981-6c26188bff02",
+    "title": "The Disappearing Spoon",
+    "author": "Sam Kean",
+    "publisher": "Little, Brown and Company",
+    "genre": "Chemistry",
+    "isbn": "9780316051637",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "36958d80-bdd5-4e1b-9224-15fa6228fdcb",
+    "title": "The Discovery of India",
+    "author": "Jawaharlal Nehru",
+    "publisher": "Penguin India",
+    "genre": "History",
+    "isbn": "9780143031033",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "a4eb5ff6-6499-4dbe-b3ae-41c394fa487b",
+    "title": "The Fault in Our Stars",
+    "author": "John Green",
+    "publisher": "Dutton Books",
+    "genre": "Romance Novels",
+    "isbn": "9780525478812",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "9e911388-7b27-4300-bcba-755ce1bc02be",
+    "title": "The Geography of Bliss",
+    "author": "Eric Weiner",
+    "publisher": "Twelve",
+    "genre": "Geography",
+    "isbn": "9780446698377",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "53e9e02b-7937-4bee-bb1e-a5c9839f2960",
+    "title": "The Girl on the Train",
+    "author": "Paula Hawkins",
+    "publisher": "Riverhead Books",
+    "genre": "Adult",
+    "isbn": "9781594634024",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "aba36f48-1b92-4742-9034-fffb6ae8fb4e",
+    "title": "The God of Small Things",
+    "author": "Arundhati Roy",
+    "publisher": "Random House Trade Paperbacks",
+    "genre": "Fiction",
+    "isbn": "9780812979657",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "3f6670b9-b356-431e-bb49-0d00371edeb5",
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "publisher": "Scribner",
+    "genre": "English Literature",
+    "isbn": "9780743273565",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "e7c65ec1-1a10-4483-801f-0ee6c8a92e60",
+    "title": "The Hating Game",
+    "author": "Sally Thorne",
+    "publisher": "Little, Brown Book Group",
+    "genre": "Romance Novels",
+    "isbn": "9781472249173",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "b18328cd-ef5e-45d5-bb08-227c220ac802",
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "publisher": "Houghton Mifflin Harcourt",
+    "genre": "Children's Book",
+    "isbn": "9780547928227",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "438382a9-f906-4b42-9e46-e0b2a06735d2",
+    "title": "The Jungle Book",
+    "author": "Rudyard Kipling",
+    "publisher": "CreateSpace Independent Publishing Platform",
+    "genre": "Children's Book",
+    "isbn": "9781503332546",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "8f01548f-c39a-4b55-9527-a18375100547",
+    "title": "The Kite Runner",
+    "author": "Khaled Hosseini",
+    "publisher": "Riverhead Books",
+    "genre": "Fiction",
+    "isbn": "9781594631931",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "a4b41dea-6cf4-45ae-bc38-03076b4f7aea",
+    "title": "The Lean Startup",
+    "author": "Eric Ries",
+    "publisher": "Crown Business",
+    "genre": "Business",
+    "isbn": "9780307887894",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "3bf9fb07-3593-4775-8979-fee23731324c",
+    "title": "The Lion, the Witch and the Wardrobe",
+    "author": "C.S. Lewis",
+    "publisher": "HarperCollins",
+    "genre": "Children's Book",
+    "isbn": "9780064471046",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "e63fd613-418b-476d-a2d6-50ee5ee5b171",
+    "title": "The Little Prince",
+    "author": "Antoine de Saint-Exupéry",
+    "publisher": "Harcourt",
+    "genre": "Children's Book",
+    "isbn": "9780156012195",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "4171d4ab-16e6-4d8f-837b-0ef2bbf90edd",
+    "title": "The Monk Who Sold His Ferrari",
+    "author": "Robin Sharma",
+    "publisher": "HarperOne",
+    "genre": "Self-Help",
+    "isbn": "9780062563293",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "d7732fab-fca7-476c-ab30-e645632db4d0",
+    "title": "The Namesake",
+    "author": "Jhumpa Lahiri",
+    "publisher": "Mariner Books",
+    "genre": "Fiction",
+    "isbn": "9780618485222",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "6606eff1-5ef3-46e8-b0d4-3a298da2dfa6",
+    "title": "The Notebook",
+    "author": "Nicholas Sparks",
+    "publisher": "Warner Books",
+    "genre": "Romance Novels",
+    "isbn": "9780446605236",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "c4fe506b-9255-4ddd-a9dc-41f73cd211f2",
+    "title": "The Palace of Illusions",
+    "author": "Chitra Banerjee Divakaruni",
+    "publisher": "Anchor",
+    "genre": "Fiction",
+    "isbn": "9781400096206",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "41370bab-ef38-47af-b46f-1bc128ff02a9",
+    "title": "The Picture of Dorian Gray",
+    "author": "Oscar Wilde",
+    "publisher": "Penguin Classics",
+    "genre": "English Literature",
+    "isbn": "9780141439570",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "5b3eac67-6749-4208-aff3-e5242b96ce0e",
+    "title": "The Power of Geography",
+    "author": "Tim Marshall",
+    "publisher": "Elliott & Thompson",
+    "genre": "Geography",
+    "isbn": "9781783966035",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "92ff98a3-6969-448a-9d48-3bf169f5c7ab",
+    "title": "The Power of Now",
+    "author": "Eckhart Tolle",
+    "publisher": "New World Library",
+    "genre": "Self-Help",
+    "isbn": "9781577314806",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "926f571c-7c0a-498f-92ec-6b4b19dfbdc1",
+    "title": "The Psychology of Money",
+    "author": "Morgan Housel",
+    "publisher": "Harriman House",
+    "genre": "Business",
+    "isbn": "9780857197689",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "fd6ba42a-5a5e-4f6f-a86b-82048580254e",
+    "title": "The Republic",
+    "author": "Plato",
+    "publisher": "Penguin Classics",
+    "genre": "Philosophy",
+    "isbn": "9780140449266",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "041a299b-27d4-40a6-a161-1134786a9e97",
+    "title": "The Sceptical Chymist",
+    "author": "Robert Boyle",
+    "publisher": "Dover Publications",
+    "genre": "Chemistry",
+    "isbn": "9780486496331",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "8cc9cef7-4b16-4ea4-bc66-373132e24d2f",
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "publisher": "Celadon Books",
+    "genre": "Adult",
+    "isbn": "9781250301697",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "be2fe4a1-ce9a-4895-b4df-69c3af49c614",
+    "title": "The Silk Roads",
+    "author": "Peter Frankopan",
+    "publisher": "Bloomsbury",
+    "genre": "History",
+    "isbn": "9781408839997",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "a32ba0ec-ca0e-43a6-85ae-3cce2bb7be42",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "publisher": "Harper",
+    "genre": "Self-Help",
+    "isbn": "9780062457714",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "93f38e32-03b8-487d-98e7-0f8aaf3b415c",
+    "title": "The Time Traveler's Wife",
+    "author": "Audrey Niffenegger",
+    "publisher": "Harcourt",
+    "genre": "Romance Novels",
+    "isbn": "9780156029438",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "c442a86f-1a6b-4046-9f47-c23897f8e060",
+    "title": "The White Tiger",
+    "author": "Aravind Adiga",
+    "publisher": "Free Press",
+    "genre": "Fiction",
+    "isbn": "9781416562603",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "be0fccc1-127c-49e5-95e2-320533e305ec",
+    "title": "The Woman in the Window",
+    "author": "A.J. Finn",
+    "publisher": "William Morrow",
+    "genre": "Adult",
+    "isbn": "9780062678416",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "d3391677-cfdd-4692-8f00-601206d5cfb5",
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "publisher": "TarcherPerigee",
+    "genre": "Business",
+    "isbn": "9781585424337",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "2b3ed101-838d-4adc-956b-4bcc7445bd15",
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "publisher": "Harper Perennial",
+    "genre": "English Literature",
+    "isbn": "9780061120084",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "a47e3649-f5cb-4ee3-a239-6c3f15f353a1",
+    "title": "Uncle Tungsten",
+    "author": "Oliver Sacks",
+    "publisher": "Vintage",
+    "genre": "Chemistry",
+    "isbn": "9780375714671",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "a2b17b35-2391-45e5-8530-07f3806fae15",
+    "title": "Underland: A Deep Time Journey",
+    "author": "Robert Macfarlane",
+    "publisher": "W. W. Norton & Company",
+    "genre": "Geography",
+    "isbn": "9780393242140",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "e4f69df0-42b9-47e7-bd40-37530e26368d",
+    "title": "Verity",
+    "author": "Colleen Hoover",
+    "publisher": "Grand Central Publishing",
+    "genre": "Adult",
+    "isbn": "9781538724736",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "6a793b13-32a8-4717-b9fd-2fc88bf73dbd",
+    "title": "Wuthering Heights",
+    "author": "Emily Brontë",
+    "publisher": "Penguin Classics",
+    "genre": "English Literature",
+    "isbn": "9780141439556",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  },
+  {
+    "_id": "660cefa2-18e5-43fc-9f35-ac52582cc79b",
+    "title": "Zero to One",
+    "author": "Peter Thiel",
+    "publisher": "Crown Business",
+    "genre": "Business",
+    "isbn": "9780804139298",
+    "created_at": "2026-01-06T11:03:24.3Z",
+    "updated_at": "2026-01-06T11:03:24.3Z"
+  }
+]
