@@ -15,9 +15,23 @@ export default async function find_books(criteria = {}) {
       b.genre, 
       b.isbn,
       b.created_at,
-      b.updated_at
+      b.updated_at,
+      COALESCE(
+        json_agg(
+            json_build_object(
+                'transaction_id', t._id,
+                'user_name', u.name,
+                'borrowed_by', u._id,
+                'due_date', t.due_by
+            ) 
+        ) FILTER (WHERE t._id IS NOT NULL), 
+        '[]'
+      ) as loans
     FROM 
       library.books b
+    LEFT JOIN library.inventory inv ON inv.bookid = b._id
+    LEFT JOIN library.bookloans t ON t.loaned_item = inv._id AND t.returned_on IS NULL
+    LEFT JOIN library.users u ON t.loaned_to = u._id
   `;
 
   const conditions = [];
@@ -40,6 +54,14 @@ export default async function find_books(criteria = {}) {
 
   if (conditions.length > 0) {
     query += ` WHERE ${conditions.join(" AND ")}`;
+  }
+
+  query += " GROUP BY b._id";
+
+  // Filter for borrowed status locally via HAVING or just return structure and let frontend filter?
+  // Frontend requests /books?status=borrowed
+  if (criteria.status === "borrowed") {
+    query += ` HAVING COUNT(t._id) > 0`;
   }
 
   query += " ORDER BY b.title ASC;";

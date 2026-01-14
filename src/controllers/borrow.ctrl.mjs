@@ -50,7 +50,7 @@ const borrowBooks = async (req, res) => {
       : [req.body.books];
     // check if any book is issued already if it is then how many if 1 then only possible borrows is 2 and if max=3 no borrows
     const currentBorrowsCount = dues.alldues ? dues.alldues.length : 0;
-    if (entries.length + currentBorrowsCount >= 3) {
+    if (entries.length + currentBorrowsCount > 3) {
       return res.status(409).json({
         error: `You are trying to borrow ${
           entries.length
@@ -75,12 +75,10 @@ const borrowBooks = async (req, res) => {
         returnRow: true,
       });
       if (!bookDetails) {
-        return res
-          .status(400)
-          .json({
-            error: "Invalid bookid provided",
-            provided: `${entry.bookid}`,
-          });
+        return res.status(400).json({
+          error: "Invalid bookid provided",
+          provided: `${entry.bookid}`,
+        });
       }
       // check for book availability
       const borrowedCount = await getBorrowedCountForBook(bookDetails._id);

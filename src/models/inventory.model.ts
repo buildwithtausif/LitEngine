@@ -16,7 +16,7 @@ interface Inventory {
 export default class inventoryModel {
   constructor(
     public _id?: UUID,
-    public bookid?: UUID, 
+    public bookid?: UUID,
     public totalqty?: number,
     public currentqty?: number
   ) {}
@@ -26,45 +26,70 @@ export default class inventoryModel {
    * @returns {Promise<Inventory>} The created inventory record.
    */
   async createEntry(): Promise<Inventory> {
-    // if the model receives an id explicitly then pass as is and if not... generate a new one
-    const newId: UUID = this._id || generateUuid();
-    // template query
-    let query: string = `
-            INSERT INTO library.inventory (_id,bookid, totalqty)
-            VALUES ($1, $2, $3)
+    // 1. Check if the book exists in the global 'books' table
+    const bookExists: boolean = await recordExist({
+      schema: "library",
+      tableName: "books",
+      colName: "_id",
+      value: this.bookid,
+    });
+
+    if (!bookExists) {
+      throw getErrorMessage(
+        `Invalid BookID: The book ${this.bookid} is not available in the global database!`
+      );
+    }
+
+    // 2. Check if inventory entry already exists for this book
+    const existingInventory = await db.oneOrNone(
+      `SELECT * FROM library.inventory WHERE bookid = $1 AND deleted_at IS NULL`,
+      [this.bookid]
+    );
+
+    if (existingInventory) {
+      // UPDATE existing record
+      const query = `
+        UPDATE library.inventory
+        SET totalqty = $1, currentqty = $2, updated_at = NOW()
+        WHERE _id = $3
+        RETURNING *;
+      `;
+      try {
+        const inventory: Inventory = await db.one(query, [
+          this.totalqty,
+          this.currentqty,
+          existingInventory._id,
+        ]);
+        return inventory;
+      } catch (error) {
+        throw getErrorMessage(error);
+      }
+    } else {
+      // INSERT new record
+      const newId: UUID = this._id || generateUuid();
+      const query = `
+            INSERT INTO library.inventory (_id, bookid, totalqty, currentqty)
+            VALUES ($1, $2, $3, $4)
             RETURNING *;
         `;
-    try {
-      // need to check if the provided bookID actually exists in the global book-table
-      // if it's not stop and suggest to first import book details in the global database
-      const recordFound: boolean = await recordExist({
-        schema: "library",
-        tableName: "books",
-        colName: "_id",
-        value: this.bookid,
-      });
-      
-      if (!recordFound) {
-        throw getErrorMessage(
-          `Invalid BookID: The book ${this.bookid} is not available in the global database!`
-        );
+      try {
+        const inventory: Inventory = await db.one(query, [
+          newId,
+          this.bookid,
+          this.totalqty,
+          this.currentqty,
+        ]);
+        return inventory;
+      } catch (error: unknown) {
+        throw getErrorMessage(error);
       }
-      // if book is available in the global database build query and add that to database
-      const inventory: Inventory = await db.one(query, [
-        newId,
-        this.bookid,
-        this.totalqty
-      ]);
-      return inventory;
-    } catch (error: unknown) {
-      throw getErrorMessage(error);
     }
   }
 
   /**
    * Bulk inserts multiple inventory items.
    * Validates all book IDs before insertion. Rejects the entire batch if any ID is invalid.
-   * 
+   *
    * @param {Array<{bookid: UUID, totalqty: number}>} items - Array of inventory items to create.
    * @returns {Promise<Inventory[]>} Array of created inventory records.
    * @throws {Error} If any book ID is invalid.
@@ -125,8 +150,7 @@ export default class inventoryModel {
         { table: { schema: "library", table: "inventory" } }
       );
 
-      const query =
-        pgp.helpers.insert(validItems, cs) + " RETURNING *";
+      const query = pgp.helpers.insert(validItems, cs) + " RETURNING *";
 
       const result: Inventory[] = await db.any(query);
       return result;
@@ -173,11 +197,11 @@ export default class inventoryModel {
    * @returns {Promise<Inventory[]>} The deleted inventory records.
    */
   async deleteEntries(ids?: UUID[]): Promise<Inventory[]> {
-     const targets = ids && ids.length > 0 ? ids : (this._id ? [this._id] : []);
-     
-     if (targets.length === 0) return [];
+    const targets = ids && ids.length > 0 ? ids : this._id ? [this._id] : [];
 
-     // Use IN operator for bulk update
+    if (targets.length === 0) return [];
+
+    // Use IN operator for bulk update
     let query: string = `
             UPDATE library.inventory
             SET deleted_at = NOW()
