@@ -48,42 +48,168 @@ Defaults to `http://localhost:8000` (or as configured).
 
 ### Endpoints
 
-#### Books (`/books`)
+### Endpoints
 
-| Method  | Endpoint | Description                                                 |
-| :------ | :------- | :---------------------------------------------------------- |
-| `GET`   | `/books` | Retrieve books with filtering (title, author, genre, etc.). |
-| `POST`  | `/books` | Add one or more books to the library.                       |
-| `PATCH` | `/books` | Update book details.                                        |
+#### 📚 Books (`/api/books`)
 
-#### Borrow (`/borrow`)
+Manage the library's book collection.
 
-| Method | Endpoint  | Description                                                  |
-| :----- | :-------- | :----------------------------------------------------------- |
-| `POST` | `/borrow` | Issue books to a user (checks for overdue items and limits). |
+**1. Get Books**
+Retrieve books with optional filtering.
 
-#### Inventory (`/inventory`)
+- **GET** `/api/books`
+- **Query Parameters**:
+  - `title`: Partial match (e.g., `?title=Expectations`)
+  - `author`: Partial match (e.g., `?author=Dickens`)
+  - `genre`: Partial match
+  - `isbn`: Exact match
+  - `id`: Exact UUID match
+- **Example Usage**:
+  ```http
+  GET /api/books?author=Dickens&genre=Classic
+  ```
 
-| Method   | Endpoint     | Description                                                    |
-| :------- | :----------- | :------------------------------------------------------------- |
-| `GET`    | `/inventory` | View inventory levels.                                         |
-| `POST`   | `/inventory` | Add stock to inventory.                                        |
-| `DELETE` | `/inventory` | Remove items from inventory (prevented if active loans exist). |
+**2. Add Books**
+Add one or more books.
 
-#### Return (`/return`)
+- **POST** `/api/books`
+- **Payload** (Single or Array):
+  ```json
+  {
+    "title": "Great Expectations",
+    "author": "Charles Dickens",
+    "isbn": "978-0141439563",
+    "genre": "Classic",
+    "publisher": "Penguin Classics",
+    "quantity": 5
+  }
+  ```
 
-| Method  | Endpoint  | Description                              |
-| :------ | :-------- | :--------------------------------------- |
-| `PATCH` | `/return` | Return borrowed books by transaction ID. |
+**3. Update Book**
+Update book details by ID or ISBN.
 
-#### Users (`/users`)
+- **PATCH** `/api/books`
+- **Payload**:
+  ```json
+  {
+    "_id": "uuid-of-book", // OR "isbn": "..."
+    "edit_book_stack": [
+      { "genre": "Victorian Literature" },
+      { "publisher": "Vintage" }
+    ]
+  }
+  ```
 
-| Method   | Endpoint          | Description                                           |
-| :------- | :---------------- | :---------------------------------------------------- |
-| `GET`    | `/users`          | List users or find by ID/Email.                       |
-| `POST`   | `/users`          | Register a new user.                                  |
-| `PATCH`  | `/users/:user_id` | Update user details.                                  |
-| `DELETE` | `/users/:user_id` | Soft delete a user (prevented if active loans exist). |
+#### 📖 Borrow (`/api/borrow`)
+
+Handle book lending transactions.
+
+**Issue Books**
+
+- **POST** `/api/borrow`
+- **Payload**:
+  ```json
+  {
+    "user_id": "user-id-(not uuid)",
+    "books": [{ "bookid": "book-uuid-1" }, { "bookid": "book-uuid-2" }]
+  }
+  ```
+  > **Note**: Checks for user existence, overdue books, and maximum loan limits (3 books/user).
+
+#### 📦 Inventory (`/api/inventory`)
+
+Manage physical stock.
+
+**1. View Inventory**
+
+- **GET** `/api/inventory`
+- **Query Parameters**:
+  - `id`: View specific inventory item by UUID (e.g., `?id=...`)
+
+**2. Add Stock**
+
+- **POST** `/api/inventory`
+- **Payload** (Single or Bulk):
+  ```json
+  {
+    "inventory": [
+      {
+        "bookid": "book-uuid",
+        "totalqty": 10
+      }
+    ]
+  }
+  ```
+  _(Or single object without `inventory` wrapper)_
+
+**3. Delete Stock**
+
+- **DELETE** `/api/inventory`
+- **Payload**:
+  ```json
+  {
+    "ids": ["inventory-uuid-1", "inventory-uuid-2"]
+  }
+  ```
+  > **Constraint**: Cannot delete items that are currently on loan.
+
+#### ↩️ Return (`/api/return`)
+
+Process book returns.
+
+**Return Books**
+
+- **PATCH** `/api/return`
+- **Payload**:
+  ```json
+  [
+    { "transaction_id": "loan-transaction-uuid-1" },
+    { "transaction_id": "loan-transaction-uuid-2" }
+  ]
+  ```
+
+#### 👥 Users (`/api/users`)
+
+User management.
+
+**1. List / Find Users**
+
+- **GET** `/api/users`
+- **Query Parameters**:
+  - `user_id`: Find by ID
+  - `email`: Find by Email
+- **Example**:
+  ```http
+  GET /api/users?email=alice@example.com
+  ```
+
+**2. Register User**
+
+- **POST** `/api/users`
+- **Payload**:
+  ```json
+  {
+    "name": "Alice Wonderland",
+    "email": "alice@example.com"
+  }
+  ```
+
+**3. Update User**
+
+- **PATCH** `/api/users/:user_id`
+- **Payload**:
+  ```json
+  {
+    "newName": "Alice W.",
+    "newEmail": "alice.new@example.com"
+  }
+  ```
+
+**4. Delete User**
+
+- **DELETE** `/api/users/:user_id`
+- **Effect**: Soft deletes the user.
+- **Constraint**: User cannot be deleted if they have active loans.
 
 ## 🗄️ Database Schema
 

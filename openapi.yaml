@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Backend API for the LitEngine library management system.
 paths:
-  /books:
+  /api/books:
     get:
       summary: Get books
       description: Retrieve books based on search criteria.
@@ -120,7 +120,7 @@ paths:
         "500":
           description: Internal Server Error
 
-  /borrow:
+  /api/borrow:
     post:
       summary: Borrow books
       description: Borrow one or more books for a user.
@@ -178,7 +178,7 @@ paths:
         "500":
           description: Internal Server Error
 
-  /inventory:
+  /api/inventory:
     get:
       summary: Read inventory
       description: Get inventory details.
@@ -272,7 +272,7 @@ paths:
         "500":
           description: Internal Server Error
 
-  /return:
+  /api/return:
     patch:
       summary: Return books
       description: Return borrowed books by transaction ID.
@@ -309,7 +309,7 @@ paths:
         "500":
           description: Internal Server Error
 
-  /users:
+  /api/users:
     get:
       summary: Get users
       description: Get all users or find specific user by ID or Email.
@@ -365,7 +365,7 @@ paths:
         "500":
           description: Internal Server Error
 
-  /users/{user_id}:
+  /api/users/{user_id}:
     patch:
       summary: Update user
       description: Update user name or email.
