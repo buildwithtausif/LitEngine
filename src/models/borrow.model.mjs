@@ -46,7 +46,7 @@ export async function getBorrowedCountForBook(book_uuid) {
     SELECT COUNT(*) FROM library.bookloans WHERE loaned_item = $1 AND returned_on IS NULL
   `;
   try {
-    const count = await db.one(query, [book_uuid], a => +a.count); // +a.count is equivalent of Number(a.count) or ParseInt(a.count,10)
+    const count = await db.one(query, [book_uuid], (a) => +a.count); // +a.count is equivalent of Number(a.count) or ParseInt(a.count,10)
     return count;
   } catch (err) {
     console.error(
@@ -68,7 +68,7 @@ export async function getBorrowedCountForBook(book_uuid) {
 /**
  * Executes a borrow transaction.
  * Checks book availability, creates loan records, and decrements inventory quantity.
- * 
+ *
  * @param {borrowReqStruct[]} newBorrowings - Array of borrow request objects.
  * @returns {Promise<Object[]>} The created loan records.
  * @throws {Error} If database transaction fails or conflicts occur (e.g. book unavailable).
@@ -90,27 +90,37 @@ export async function borrowTransaction(newBorrowings) {
       for (const borrow of newBorrowings) {
         // gets the total quantity and its unique id of the book associated with its uuid
         // FIXED: Joined with library.books to get the title, as inventory doesn't have it
-        const bookDetails = await t.one(
-          `SELECT i.bookid, b.title, i.currentQty 
-           FROM library.inventory i
-           JOIN library.books b ON i.bookid = b._id
-           WHERE i._id = $1`,
-          [borrow.loaned_item]
-        );
-        
+        let bookDetails;
+        try {
+          bookDetails = await t.one(
+            `SELECT i.bookid, b.title, i.currentQty 
+             FROM library.inventory i
+             JOIN library.books b ON i.bookid = b._id
+             WHERE i._id = $1 AND i.deleted_at IS NULL`,
+            [borrow.loaned_item]
+          );
+        } catch (err) {
+          if (err.code === pgp.errors.queryResultErrorCode.noData) {
+            throw new Error(
+              `Conflict: The book (ID: ${borrow.loaned_item}) is unavailable or has been deleted.`
+            );
+          }
+          throw err;
+        }
+
         // Check availability using currentQty directly
         // This handles the Concurrency Edge Case (Alice vs Bob) effectively because
         // we are inside a transaction. The SELECT might read old data if isolation level is low,
         // (default Read Committed). But the subsequent UPDATE will lock.
         // Better: We can rely on the UPDATE's returning value or a WHERE clause.
         // Let's keep the user's logic structure but use currentQty.
-        
+
         if (bookDetails.currentqty <= 0) {
-           throw new Error(
+          throw new Error(
             `Conflict: All copies of '${bookDetails.title}' are currently borrowed.`
-           );
+          );
         }
-        
+
         // DECREMENT currentQty
         await t.none(
           "UPDATE library.inventory SET currentQty = currentQty - 1 WHERE _id = $1",
