@@ -89,7 +89,7 @@ const Transactions = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between gap-4">
-        <h1 className="text-2xl font-bold text-slate-800 dark:text-white">
+        <h1 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">
           Active Transactions
         </h1>
         <div className="relative">
@@ -113,93 +113,97 @@ const Transactions = () => {
         </div>
       ) : (
         <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm transition-colors">
-          <table className="w-full text-left border-collapse">
-            <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
-              <tr>
-                <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
-                  Transaction ID
-                </th>
-                <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
-                  Book
-                </th>
-                <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
-                  User
-                </th>
-                <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
-                  Due Date
-                </th>
-                <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
-                  Status
-                </th>
-                <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400 text-right">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredTransactions.length > 0 ? (
-                filteredTransactions.map((t) => {
-                  const isOverdue = new Date(t.due_date) < new Date();
-                  return (
-                    <tr
-                      key={t.transaction_id}
-                      className="border-b border-slate-100 dark:border-slate-700 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
-                    >
-                      <td className="p-4 text-sm font-mono text-slate-500 dark:text-slate-400">
-                        {t.transaction_id}
-                      </td>
-                      <td className="p-4 text-sm font-medium text-slate-800 dark:text-white">
-                        {t.book_title}
-                        <br />
-                        <span className="text-xs text-slate-400 dark:text-slate-500">
-                          ISBN: {t.book_isbn}
-                        </span>
-                      </td>
-                      <td className="p-4 text-sm text-slate-600 dark:text-slate-300">
-                        {t.user_name}
-                        <br />
-                        <span className="text-xs text-slate-400 dark:text-slate-500">
-                          ID: {t.borrowed_by}
-                        </span>
-                      </td>
-                      <td className="p-4 text-sm text-slate-600 dark:text-slate-300">
-                        {new Date(t.due_date).toLocaleDateString()}
-                      </td>
-                      <td className="p-4">
-                        <span
-                          className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
-                            isOverdue
-                              ? "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400"
-                              : "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400"
-                          }`}
-                        >
-                          {isOverdue ? "Overdue" : "Active"}
-                        </span>
-                      </td>
-                      <td className="p-4 text-right">
-                        <button
-                          onClick={() => handleReturn(t.transaction_id)}
-                          disabled={returningId === t.transaction_id}
-                          className="px-3 py-1 text-sm bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors disabled:opacity-50"
-                        >
-                          {returningId === t.transaction_id ? "..." : "Return"}
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })
-              ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[700px] text-left border-collapse">
+              <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
                 <tr>
-                  <td
-                    colSpan={6}
-                    className="p-8 text-center text-slate-400 dark:text-slate-500"
-                  >
-                    No active transactions found.
-                  </td>
+                  <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
+                    Transaction ID
+                  </th>
+                  <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
+                    Book
+                  </th>
+                  <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
+                    User
+                  </th>
+                  <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
+                    Due Date
+                  </th>
+                  <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
+                    Status
+                  </th>
+                  <th className="p-4 text-sm font-semibold text-slate-600 dark:text-slate-400 text-right">
+                    Actions
+                  </th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredTransactions.length > 0 ? (
+                  filteredTransactions.map((t) => {
+                    const isOverdue = new Date(t.due_date) < new Date();
+                    return (
+                      <tr
+                        key={t.transaction_id}
+                        className="border-b border-slate-100 dark:border-slate-700 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <td className="p-4 text-sm font-mono text-slate-500 dark:text-slate-400">
+                          {t.transaction_id}
+                        </td>
+                        <td className="p-4 text-sm font-medium text-slate-800 dark:text-white">
+                          {t.book_title}
+                          <br />
+                          <span className="text-xs text-slate-400 dark:text-slate-500">
+                            ISBN: {t.book_isbn}
+                          </span>
+                        </td>
+                        <td className="p-4 text-sm text-slate-600 dark:text-slate-300">
+                          {t.user_name}
+                          <br />
+                          <span className="text-xs text-slate-400 dark:text-slate-500">
+                            ID: {t.borrowed_by}
+                          </span>
+                        </td>
+                        <td className="p-4 text-sm text-slate-600 dark:text-slate-300">
+                          {new Date(t.due_date).toLocaleDateString()}
+                        </td>
+                        <td className="p-4">
+                          <span
+                            className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
+                              isOverdue
+                                ? "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400"
+                                : "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400"
+                            }`}
+                          >
+                            {isOverdue ? "Overdue" : "Active"}
+                          </span>
+                        </td>
+                        <td className="p-4 text-right">
+                          <button
+                            onClick={() => handleReturn(t.transaction_id)}
+                            disabled={returningId === t.transaction_id}
+                            className="px-3 py-1 text-sm bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors disabled:opacity-50"
+                          >
+                            {returningId === t.transaction_id
+                              ? "..."
+                              : "Return"}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={6}
+                      className="p-8 text-center text-slate-400 dark:text-slate-500"
+                    >
+                      No active transactions found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

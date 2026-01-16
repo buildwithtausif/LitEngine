@@ -266,26 +266,26 @@ const AddBook = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-slate-800 dark:text-white">
+        <h1 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">
           Add Books
         </h1>
-        <p className="text-slate-500 dark:text-slate-400">
+        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
           Bulk import new titles or add existing books to inventory.
         </p>
       </div>
 
       {/* Mode Toggle */}
       <div className="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm transition-colors">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <p className="font-medium text-slate-800 dark:text-white">
+            <p className="font-medium text-slate-800 dark:text-white text-sm sm:text-base">
               {isInventoryMode
                 ? "Add Existing Books to Inventory"
                 : "Add New Books to Collection"}
             </p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
               {isInventoryMode
                 ? "Search and select multiple books to add stock (bulk operation)"
                 : "Import multiple new book entries at once"}
@@ -457,7 +457,7 @@ const AddBook = () => {
                         )}
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <input
                           required
                           type="text"
@@ -466,7 +466,7 @@ const AddBook = () => {
                           onChange={(e) =>
                             updateBookEntry(entry.id, "title", e.target.value)
                           }
-                          className="px-3 py-2 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/20 text-slate-800 dark:text-white placeholder-slate-400"
+                          className="px-3 py-2.5 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/20 text-slate-800 dark:text-white placeholder-slate-400 text-base"
                         />
                         <input
                           required
@@ -476,11 +476,11 @@ const AddBook = () => {
                           onChange={(e) =>
                             updateBookEntry(entry.id, "author", e.target.value)
                           }
-                          className="px-3 py-2 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/20 text-slate-800 dark:text-white placeholder-slate-400"
+                          className="px-3 py-2.5 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/20 text-slate-800 dark:text-white placeholder-slate-400 text-base"
                         />
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                         <input
                           type="text"
                           placeholder="ISBN"
@@ -488,7 +488,7 @@ const AddBook = () => {
                           onChange={(e) =>
                             updateBookEntry(entry.id, "isbn", e.target.value)
                           }
-                          className="px-3 py-2 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/20 text-slate-800 dark:text-white placeholder-slate-400"
+                          className="px-3 py-2.5 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500/20 text-slate-800 dark:text-white placeholder-slate-400 text-base"
                         />
                         <div className="flex flex-col gap-1">
                           <select

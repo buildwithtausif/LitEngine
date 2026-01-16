@@ -11,6 +11,7 @@ import AddBook from "./pages/AddBook";
 import ApiDocs from "./pages/ApiDocs";
 import { SearchProvider } from "./contexts/SearchContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { SidebarProvider } from "./contexts/SidebarContext";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import { TutorialProvider } from "./contexts/TutorialContext";
@@ -20,25 +21,28 @@ import { Outlet } from "react-router-dom";
 const DashboardLayout = () => (
   <ThemeProvider>
     <TutorialProvider>
-      <div className="flex h-screen bg-[#FDFBF7] dark:bg-slate-900 transition-colors duration-300 relative overflow-hidden">
-        {/* Global Background Art */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <img
-            src="/nirvana.svg"
-            className="w-full h-full object-cover opacity-60 dark:opacity-20"
-            alt="background"
-          />
-        </div>
+      <SidebarProvider>
+        <div className="flex h-screen bg-[#FDFBF7] dark:bg-slate-900 transition-colors duration-300 relative overflow-hidden">
+          {/* Global Background Art */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <img
+              src="/nirvana.svg"
+              className="w-full h-full object-cover opacity-60 dark:opacity-20"
+              alt="background"
+            />
+          </div>
 
-        <Sidebar />
-        <div className="flex-1 flex flex-col ml-64 h-screen overflow-hidden relative z-10">
-          <Header />
-          <main className="flex-1 overflow-y-auto p-8 relative">
-            <Outlet />
-            <ZainabGuide />
-          </main>
+          <Sidebar />
+          {/* Responsive main content area */}
+          <div className="flex-1 flex flex-col lg:ml-64 h-screen overflow-hidden relative z-10">
+            <Header />
+            <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 relative">
+              <Outlet />
+              <ZainabGuide />
+            </main>
+          </div>
         </div>
-      </div>
+      </SidebarProvider>
     </TutorialProvider>
   </ThemeProvider>
 );

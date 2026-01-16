@@ -151,12 +151,12 @@ const GlobalSearchDetails = ({ type, data }: GlobalSearchDetailsProps) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div>
             <label className="text-slate-500 dark:text-slate-400 block mb-1">
               Email
             </label>
-            <div className="font-medium text-slate-800 dark:text-white">
+            <div className="font-medium text-slate-800 dark:text-white break-words">
               {user.email || "N/A"}
             </div>
           </div>
@@ -228,7 +228,7 @@ const GlobalSearchDetails = ({ type, data }: GlobalSearchDetailsProps) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 text-sm bg-slate-50 dark:bg-slate-700/50 p-4 rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm bg-slate-50 dark:bg-slate-700/50 p-4 rounded-lg">
           <div>
             <label className="text-slate-500 dark:text-slate-400 block">
               Genre

@@ -140,7 +140,7 @@ const Dashboard = () => {
               placeholder="Filter..."
               value={historySearch}
               onChange={(e) => setHistorySearch(e.target.value)}
-              className="px-3 py-1 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-slate-700 dark:text-slate-300 w-32 focus:w-48 transition-all"
+              className="px-3 py-1.5 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-slate-700 dark:text-slate-300 w-full sm:w-32 sm:focus:w-48 transition-all"
             />
           </div>
 
@@ -155,14 +155,14 @@ const Dashboard = () => {
             {filteredOverdue.map((loan: any) => (
               <div
                 key={loan._id}
-                className="flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-100 dark:border-red-900/30"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-100 dark:border-red-900/30"
               >
-                <div className="flex items-center gap-4">
-                  <div className="p-2 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-lg">
-                    <Book size={20} />
+                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div className="flex-shrink-0 p-2 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-lg">
+                    <Book size={18} className="sm:w-5 sm:h-5" />
                   </div>
-                  <div>
-                    <h4 className="font-medium text-slate-800 dark:text-white">
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-medium text-slate-800 dark:text-white truncate">
                       {loan.bookTitle || "Unknown Book"}
                     </h4>
                     <p className="text-sm text-red-600 dark:text-red-400">
@@ -173,7 +173,7 @@ const Dashboard = () => {
                 <button
                   onClick={() => handleReturn(loan._id)}
                   disabled={returningId === loan._id}
-                  className="px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/30 hover:bg-red-200 dark:hover:bg-red-900/50 rounded-lg transition-colors"
+                  className="w-full sm:w-auto px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/30 hover:bg-red-200 dark:hover:bg-red-900/50 rounded-lg transition-colors flex-shrink-0"
                 >
                   {returningId === loan._id ? "..." : "Return"}
                 </button>

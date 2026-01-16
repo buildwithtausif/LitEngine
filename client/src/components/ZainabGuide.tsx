@@ -102,7 +102,7 @@ const ZainabGuide = () => {
 
   return (
     <div
-      className={`fixed bottom-4 right-4 z-[9999] transition-all duration-500 ease-in-out flex flex-col items-end ${
+      className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] transition-all duration-500 ease-in-out flex flex-col items-end ${
         minimized ? "translate-y-20" : ""
       }`}
     >
@@ -110,9 +110,9 @@ const ZainabGuide = () => {
       {minimized && (
         <button
           onClick={() => setMinimized(false)}
-          className="bg-white dark:bg-slate-800 text-purple-600 p-3 rounded-full shadow-lg border-2 border-purple-200 hover:scale-110 transition-transform animate-bounce relative z-50 mb-20 mr-2"
+          className="bg-white dark:bg-slate-800 text-purple-600 p-2 sm:p-3 rounded-full shadow-lg border-2 border-purple-200 hover:scale-110 transition-transform animate-bounce relative z-50 mb-16 sm:mb-20 mr-1 sm:mr-2"
         >
-          <Sparkles size={24} />
+          <Sparkles size={20} className="sm:w-6 sm:h-6" />
           <span className="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full animate-ping" />
         </button>
       )}
@@ -132,41 +132,42 @@ const ZainabGuide = () => {
           )}
 
           {/* Speech Bubble */}
-          <div className="mr-8 mb-4 relative max-w-[300px] w-full origin-bottom-right animate-float">
-            <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl rounded-br-none shadow-2xl border border-slate-100 dark:border-slate-700 relative z-10">
+          <div className="mr-4 sm:mr-8 mb-3 sm:mb-4 relative max-w-[280px] sm:max-w-[300px] w-full origin-bottom-right animate-float">
+            <div className="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-2xl rounded-br-none shadow-2xl border border-slate-100 dark:border-slate-700 relative z-10">
               {/* Header / Level */}
               <div className="flex justify-between items-center mb-2 border-b border-slate-100 dark:border-slate-700 pb-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-purple-500">
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-purple-500">
                   Level {currentQuest.level}
                 </span>
                 <button
                   onClick={() => setMinimized(true)}
-                  className="text-slate-300 hover:text-slate-500"
+                  className="text-slate-300 hover:text-slate-500 p-1"
+                  aria-label="Minimize"
                 >
                   <Minimize2 size={14} />
                 </button>
               </div>
 
               {/* Message */}
-              <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-1">
+              <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-1">
                 {currentQuest.title}
               </h3>
-              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+              <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
                 {currentQuest.msg}
               </p>
 
               {/* Action Button */}
               <button
                 onClick={currentQuest.action}
-                className="w-full py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-lg font-semibold text-sm shadow-lg shadow-purple-500/20 transition-all flex items-center justify-center gap-2 group"
+                className="w-full py-2 sm:py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-lg font-semibold text-xs sm:text-sm shadow-lg shadow-purple-500/20 transition-all flex items-center justify-center gap-2 group"
               >
                 <span>{currentQuest.actionLabel}</span>
                 {currentStep === "complete" ? (
-                  <CheckCircle size={16} />
+                  <CheckCircle size={14} className="sm:w-4 sm:h-4" />
                 ) : (
                   <ChevronRight
-                    size={16}
-                    className="group-hover:translate-x-1 transition-transform"
+                    size={14}
+                    className="sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform"
                   />
                 )}
               </button>
@@ -176,17 +177,16 @@ const ZainabGuide = () => {
             <div className="absolute -bottom-2 right-0 w-6 h-6 bg-white dark:bg-slate-800 transform rotate-45 border-r border-b border-slate-100 dark:border-slate-700 z-0"></div>
           </div>
 
-          {/* 3D Character Avatar (Fixed: NO PADDING, NO TOP GAP) */}
+          {/* 3D Character Avatar (Responsive) */}
           <div
-            className="relative mr-4 hover:scale-105 transition-transform cursor-pointer"
+            className="relative mr-2 sm:mr-4 hover:scale-105 transition-transform cursor-pointer"
             onClick={() => setShowConfetti(true)}
           >
-            {" "}
             {/* Easter egg click */}
             {/* Glow Effect */}
             <div className="absolute inset-0 bg-purple-500 blur-3xl opacity-20 rounded-full animate-pulse"></div>
-            {/* Image Container */}
-            <div className="relative w-32 h-32 rounded-full border-4 border-white dark:border-slate-700 shadow-2xl overflow-hidden bg-white dark:bg-slate-800">
+            {/* Image Container - Smaller on mobile */}
+            <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-white dark:border-slate-700 shadow-2xl overflow-hidden bg-white dark:bg-slate-800">
               <img
                 src={zainabImg}
                 alt="Zainab"
@@ -194,26 +194,26 @@ const ZainabGuide = () => {
               />
             </div>
             {/* Progress Ring */}
-            <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none scale-110">
+            <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none scale-125 sm:scale-[1.35] z-10">
               <circle
-                cx="64"
-                cy="64"
-                r="62"
+                cx="50%"
+                cy="50%"
+                r="46"
                 stroke="currentColor"
-                strokeWidth="4"
+                strokeWidth="3"
                 fill="none"
                 className="text-slate-200 dark:text-slate-700"
               />
               <circle
-                cx="64"
-                cy="64"
-                r="62"
+                cx="50%"
+                cy="50%"
+                r="46"
                 stroke="currentColor"
-                strokeWidth="4"
+                strokeWidth="3"
                 fill="none"
                 className="text-purple-500 transition-all duration-1000 ease-out"
-                strokeDasharray="400"
-                strokeDashoffset={400 - (400 * progress) / 100}
+                strokeDasharray="290"
+                strokeDashoffset={290 - (290 * progress) / 100}
                 strokeLinecap="round"
               />
             </svg>

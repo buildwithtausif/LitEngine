@@ -233,7 +233,7 @@ const Books = () => {
     <div className="space-y-6">
       <div className="flex flex-col gap-6 mb-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h1 className="text-2xl font-bold text-slate-800 dark:text-white">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">
             Book Collection
           </h1>
           {(selectedGenre || selectedAuthor || selectedPublisher) && (
@@ -248,56 +248,58 @@ const Books = () => {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-4 items-center bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
-          <div className="flex items-center gap-2 text-slate-400">
+        <div className="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
+          <div className="flex items-center gap-2 text-slate-400 mb-3">
             <Filter size={18} />
             <span className="text-sm font-medium">Filters:</span>
           </div>
 
-          <select
-            value={selectedGenre}
-            onChange={(e) => setSelectedGenre(e.target.value)}
-            className="px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 rounded-lg bg-transparent dark:bg-slate-700 text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-          >
-            <option value="" className="dark:bg-slate-800">
-              All Genres
-            </option>
-            {filterOptions.genres.map((g) => (
-              <option key={g} value={g} className="dark:bg-slate-800">
-                {g}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <select
+              value={selectedGenre}
+              onChange={(e) => setSelectedGenre(e.target.value)}
+              className="px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 rounded-lg bg-transparent dark:bg-slate-700 text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            >
+              <option value="" className="dark:bg-slate-800">
+                All Genres
               </option>
-            ))}
-          </select>
+              {filterOptions.genres.map((g) => (
+                <option key={g} value={g} className="dark:bg-slate-800">
+                  {g}
+                </option>
+              ))}
+            </select>
 
-          <select
-            value={selectedAuthor}
-            onChange={(e) => setSelectedAuthor(e.target.value)}
-            className="px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 rounded-lg bg-transparent dark:bg-slate-700 text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-          >
-            <option value="" className="dark:bg-slate-800">
-              All Authors
-            </option>
-            {filterOptions.authors.map((a) => (
-              <option key={a} value={a} className="dark:bg-slate-800">
-                {a}
+            <select
+              value={selectedAuthor}
+              onChange={(e) => setSelectedAuthor(e.target.value)}
+              className="px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 rounded-lg bg-transparent dark:bg-slate-700 text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            >
+              <option value="" className="dark:bg-slate-800">
+                All Authors
               </option>
-            ))}
-          </select>
+              {filterOptions.authors.map((a) => (
+                <option key={a} value={a} className="dark:bg-slate-800">
+                  {a}
+                </option>
+              ))}
+            </select>
 
-          <select
-            value={selectedPublisher}
-            onChange={(e) => setSelectedPublisher(e.target.value)}
-            className="px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 rounded-lg bg-transparent dark:bg-slate-700 text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-          >
-            <option value="" className="dark:bg-slate-800">
-              All Publishers
-            </option>
-            {filterOptions.publishers.map((p) => (
-              <option key={p} value={p} className="dark:bg-slate-800">
-                {p}
+            <select
+              value={selectedPublisher}
+              onChange={(e) => setSelectedPublisher(e.target.value)}
+              className="px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 rounded-lg bg-transparent dark:bg-slate-700 text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            >
+              <option value="" className="dark:bg-slate-800">
+                All Publishers
               </option>
-            ))}
-          </select>
+              {filterOptions.publishers.map((p) => (
+                <option key={p} value={p} className="dark:bg-slate-800">
+                  {p}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
       {loading ? (

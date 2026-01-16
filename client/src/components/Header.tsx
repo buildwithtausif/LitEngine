@@ -6,6 +6,7 @@ import {
   Moon,
   Sun,
   Github,
+  Menu,
 } from "lucide-react";
 import { useSearch } from "../contexts/SearchContext";
 import { useTheme } from "../contexts/ThemeContext";
@@ -14,6 +15,7 @@ import { useTutorial } from "../contexts/TutorialContext";
 import Modal from "./Modal";
 import GlobalSearchDetails from "./GlobalSearchDetails";
 import { GraduationCap } from "lucide-react";
+import { useSidebar } from "../contexts/SidebarContext";
 
 interface SearchResult {
   type: "user" | "book";
@@ -27,8 +29,10 @@ const Header = () => {
   const { searchTerm, setSearchTerm } = useSearch();
   const { theme, toggleTheme } = useTheme();
   const { isActive, toggleTutorial } = useTutorial();
+  const { toggleSidebar } = useSidebar();
   const [suggestions, setSuggestions] = useState<SearchResult[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState<{
     type: "user" | "book";
     data: any;
@@ -146,28 +150,37 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="h-20 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between px-8 sticky top-0 z-30 transition-colors duration-300">
+    <header className="h-16 lg:h-20 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between px-4 lg:px-8 sticky top-0 z-30 transition-colors duration-300">
+      {/* Hamburger Menu - Mobile Only */}
+      <button
+        onClick={toggleSidebar}
+        className="lg:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors mr-2"
+        aria-label="Toggle menu"
+      >
+        <Menu size={24} className="text-slate-600 dark:text-slate-300" />
+      </button>
+
       <div className="flex-1 max-w-xl" ref={searchContainerRef}>
         <div className="relative">
           <Search
             className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-            size={20}
+            size={18}
           />
           <input
             type="text"
-            placeholder="Search Users, Books, ISBN..."
+            placeholder="Search..."
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
               setShowSuggestions(true);
             }}
             onFocus={() => setShowSuggestions(true)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all text-sm"
+            className="w-full pl-9 lg:pl-10 pr-3 lg:pr-4 py-2 lg:py-2.5 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all text-sm"
           />
 
           {/* Search Suggestions Dropdown */}
           {showSuggestions && suggestions.length > 0 && (
-            <div className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden max-h-96 overflow-y-auto">
+            <div className="absolute top-full left-0 right-0 w-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden max-h-96 overflow-y-auto z-50">
               <div className="p-2 text-xs font-semibold text-slate-400 uppercase tracking-wider bg-slate-50 dark:bg-slate-900">
                 Results
               </div>
@@ -179,10 +192,10 @@ const Header = () => {
                     setShowSuggestions(false);
                     setSearchTerm("");
                   }}
-                  className="w-full text-left px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-center gap-3 transition-colors"
+                  className="w-full text-left px-3 sm:px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700 last:border-0 flex items-start gap-3 transition-colors"
                 >
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                       item.type === "user"
                         ? "bg-blue-100 text-blue-600 dark:bg-blue-900/30"
                         : "bg-green-100 text-green-600 dark:bg-green-900/30"
@@ -194,13 +207,13 @@ const Header = () => {
                       <Book size={16} />
                     )}
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-slate-800 dark:text-slate-200">
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-slate-800 dark:text-slate-100 text-sm break-words">
                       {item.title}
-                    </p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                    </div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400 break-words mt-0.5">
                       {item.subtitle}
-                    </p>
+                    </div>
                   </div>
                 </button>
               ))}
@@ -209,45 +222,123 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="flex items-center gap-6">
-        <a
-          href="/dashboard/docs"
-          className="hidden md:flex items-center gap-2 px-3 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-        >
-          <Book size={16} />
-          API Documentation
-        </a>
-
+      {/* Right Actions - Desktop */}
+      <div className="hidden lg:flex items-center gap-4">
         {/* Tutorial Toggle */}
         <button
           onClick={toggleTutorial}
-          className={`p-2 rounded-lg transition-all duration-300 flex items-center gap-2 ${
+          className={`p-2 rounded-lg transition-colors ${
             isActive
-              ? "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400 ring-1 ring-purple-500/50"
-              : "text-slate-400 hover:text-purple-500 hover:bg-purple-50 dark:hover:bg-slate-700"
+              ? "bg-green-100 text-green-600 dark:bg-green-900/30"
+              : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"
           }`}
-          title={isActive ? "Hide Tutorial" : "Start Tutorial"}
+          title={isActive ? "Hide Tutorial" : "Show Tutorial"}
         >
           <GraduationCap size={20} />
-          <span className="text-sm font-medium hidden sm:inline">Demo</span>
         </button>
 
+        {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          aria-label="Toggle theme"
         >
-          {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+          {theme === "dark" ? (
+            <Sun size={20} className="text-slate-300" />
+          ) : (
+            <Moon size={20} className="text-slate-600" />
+          )}
         </button>
 
+        {/* GitHub Link */}
         <a
-          href="https://github.com/buildwithtausif"
+          href="https://github.com/buildwithtausif/LitEngine"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 pl-6 border-l border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          aria-label="View on GitHub"
         >
-          <Github size={18} />
-          <span className="hidden sm:inline">@buildwithtausif</span>
+          <Github size={20} className="text-slate-600 dark:text-slate-300" />
         </a>
+
+        {/* API Docs Link */}
+        <a
+          href="/dashboard/docs"
+          className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm font-medium transition-colors"
+        >
+          API Docs
+        </a>
+      </div>
+
+      {/* Right Hamburger Menu - Mobile */}
+      <div className="lg:hidden relative">
+        <button
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+          className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          aria-label="Toggle actions menu"
+        >
+          <Menu size={24} className="text-slate-600 dark:text-slate-300" />
+        </button>
+
+        {/* Mobile Actions Dropdown */}
+        {showMobileMenu && (
+          <>
+            {/* Overlay */}
+            <div
+              className="fixed inset-0 bg-black/20 z-40"
+              onClick={() => setShowMobileMenu(false)}
+            />
+
+            {/* Menu */}
+            <div className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden z-[9998]">
+              <a
+                href="/dashboard/docs"
+                className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border-b border-slate-100 dark:border-slate-700"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                <Book size={18} />
+                <span className="text-sm font-medium">API Docs</span>
+              </a>
+
+              <button
+                onClick={() => {
+                  toggleTutorial();
+                  setShowMobileMenu(false);
+                }}
+                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border-b border-slate-100 dark:border-slate-700"
+              >
+                <GraduationCap size={18} />
+                <span className="text-sm font-medium">
+                  {isActive ? "Hide Tutorial" : "Show Tutorial"}
+                </span>
+              </button>
+
+              <button
+                onClick={() => {
+                  toggleTheme();
+                  setShowMobileMenu(false);
+                }}
+                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border-b border-slate-100 dark:border-slate-700"
+              >
+                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                <span className="text-sm font-medium">
+                  {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                </span>
+              </button>
+
+              <a
+                href="https://github.com/buildwithtausif/LitEngine"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                <Github size={18} />
+                <span className="text-sm font-medium">GitHub</span>
+              </a>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Details Modal */}
