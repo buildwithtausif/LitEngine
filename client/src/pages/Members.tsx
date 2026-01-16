@@ -5,6 +5,7 @@ import { apiRequest } from "../services/api";
 import Modal from "../components/Modal";
 import { parseJoinDateFromUserId, formatDate } from "../utils/date";
 import { useSearch } from "../contexts/SearchContext";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 interface User {
   _id: string;
@@ -13,6 +14,7 @@ interface User {
 }
 
 const Members = () => {
+  useDocumentTitle("Members | LitEngine");
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);

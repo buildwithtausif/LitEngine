@@ -11,6 +11,7 @@ import {
   Plus,
   Trash2,
 } from "lucide-react";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 interface Book {
   _id: string;
@@ -58,6 +59,7 @@ const createEmptyBook = (): NewBookEntry => ({
 });
 
 const AddBook = () => {
+  useDocumentTitle("Add Books | LitEngine");
   const [isInventoryMode, setIsInventoryMode] = useState(false);
   const [existingBooks, setExistingBooks] = useState<Book[]>([]);
   const [selectedBooks, setSelectedBooks] = useState<SelectedBook[]>([]);

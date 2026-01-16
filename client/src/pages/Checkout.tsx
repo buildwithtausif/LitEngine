@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { BookUp, User } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { apiRequest } from "../services/api";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 interface Book {
   _id: string;
@@ -24,6 +25,8 @@ interface User {
 }
 
 const Checkout = () => {
+  useDocumentTitle("Check-out | LitEngine");
+
   const [books, setBooks] = useState<Book[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [selectedBook, setSelectedBook] = useState("");

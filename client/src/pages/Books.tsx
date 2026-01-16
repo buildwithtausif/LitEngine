@@ -5,6 +5,7 @@ import BookCard from "../components/BookCard";
 import Modal from "../components/Modal";
 import { useSearch } from "../contexts/SearchContext";
 import { Filter, X } from "lucide-react";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 interface Book {
   _id: string;
@@ -25,6 +26,8 @@ interface InventoryItem {
 }
 
 const Books = () => {
+  useDocumentTitle("Books | LitEngine");
+
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

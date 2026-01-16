@@ -11,6 +11,7 @@ import { toast } from "react-hot-toast";
 import { apiRequest } from "../services/api";
 
 import { useDashboardData } from "../hooks/useDashboardData";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 const StatCard = ({ title, value, icon: Icon, color }: any) => (
   <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all">
@@ -33,6 +34,8 @@ const StatCard = ({ title, value, icon: Icon, color }: any) => (
 );
 
 const Dashboard = () => {
+  useDocumentTitle("Dashboard | LitEngine");
+
   const { stats, recentTransactions, overdueList, loading, refresh } =
     useDashboardData();
   const [returningId, setReturningId] = useState<string | null>(null);

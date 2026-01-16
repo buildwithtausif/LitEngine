@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { apiRequest } from "../services/api";
 import { RefreshCw, Trash2 } from "lucide-react";
 import { useSearch } from "../contexts/SearchContext";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 interface InventoryItem {
   _id: string;
@@ -19,6 +20,7 @@ interface Book {
 }
 
 const Inventory = () => {
+  useDocumentTitle("Inventory | LitEngine");
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const { searchTerm } = useSearch();

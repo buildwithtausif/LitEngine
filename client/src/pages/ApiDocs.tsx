@@ -1,5 +1,6 @@
 import { ChevronDown, Server } from "lucide-react";
 import { useState } from "react";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 interface Endpoint {
   method: "GET" | "POST" | "PATCH" | "DELETE";
@@ -218,6 +219,8 @@ const MethodBadge = ({ method }: { method: string }) => {
 };
 
 const ApiDocs = () => {
+  useDocumentTitle("API Documentation | LitEngine");
+
   const [openItems, setOpenItems] = useState<number[]>([]);
 
   const toggleItem = (index: number) => {

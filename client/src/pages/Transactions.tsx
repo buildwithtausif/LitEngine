@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiRequest } from "../services/api";
 import { Search } from "lucide-react";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 interface Transaction {
   transaction_id: string;
@@ -19,6 +20,8 @@ interface Book {
 }
 
 const Transactions = () => {
+  useDocumentTitle("Active Transactions | LitEngine");
+
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");

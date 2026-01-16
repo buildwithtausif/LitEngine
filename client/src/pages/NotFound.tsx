@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Home, AlertTriangle } from "lucide-react";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 const NotFound = () => {
+  useDocumentTitle("404: Page Not Found | LitEngine");
+
   const navigate = useNavigate();
 
   return (
