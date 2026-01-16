@@ -8,3 +8,8 @@ brainstorms/
 booky-api-testing/
 
 .idea/
+
+# client node modules
+client/node_modules/
+# build artifacts
+dist/
