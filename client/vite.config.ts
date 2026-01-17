@@ -5,9 +5,9 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/",
+  base: "/dashboard/",
   build: {
-    outDir: "public",
+    outDir: "public/dashboard",
     emptyOutDir: true,
   },
   resolve: {
