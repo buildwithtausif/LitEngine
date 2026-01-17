@@ -6,8 +6,8 @@ import path from "path";
 export default defineConfig({
   plugins: [react()],
   base: "/dashboard/",
-  build: {
-    outDir: "../public/dashboard",
+build: {
+    outDir: "dist",
     emptyOutDir: true,
   },
   resolve: {
