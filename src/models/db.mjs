@@ -10,7 +10,7 @@ const db_pass = process.env.PSQL_PASS;
 const db_name = process.env.PSQL_DB;
 
 const dbConfig = {
-  host: db_host,
+  host: db_host.replace("https://", ""),
   port: db_port,
   database: db_name,
   user: db_user,
