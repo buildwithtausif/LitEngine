@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/dashboard/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/dashboard/assets/:path*",
@@ -6,10 +13,6 @@
     },
     {
       "source": "/dashboard/((?!.*\\.).*)",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/dashboard/",
       "destination": "/index.html"
     }
   ]
