@@ -8,17 +8,15 @@ const db_port = process.env.PSQL_PORT || "5600";
 const db_user = process.env.PSQL_USER;
 const db_pass = process.env.PSQL_PASS;
 const db_name = process.env.PSQL_DB;
+
 const dbConfig = {
-  host: db_host.replace("https://", ""),
+  host: db_host,
   port: db_port,
   database: db_name,
   user: db_user,
   password: db_pass,
   allowExitOnIdle: true,
-  ssl:
-    process.env.NODE_ENV === "production"
-      ? { rejectUnauthorized: false }
-      : false,
+  ssl: { rejectUnauthorized: false }
 };
 
 // init pg-promise and estabilish connection
