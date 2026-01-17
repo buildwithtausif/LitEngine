@@ -15,9 +15,11 @@ const dbConfig = {
   database: db_name,
   user: db_user,
   password: db_pass,
-  allowExitOnIdle: true,
   ssl: { rejectUnauthorized: false },
-  keepAlive: true,
+  max: 5,
+  connectionTimeoutMillis: 10000,
+  idleTimeoutMillis: 30000,
+  allowExitOnIdle: false
 };
 
 // init pg-promise and estabilish connection
