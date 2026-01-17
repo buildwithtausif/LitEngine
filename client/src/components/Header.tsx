@@ -7,6 +7,7 @@ import {
   Sun,
   Github,
   Menu,
+  Receipt,
 } from "lucide-react";
 import { useSearch } from "../contexts/SearchContext";
 import { useTheme } from "../contexts/ThemeContext";
@@ -18,7 +19,7 @@ import { GraduationCap } from "lucide-react";
 import { useSidebar } from "../contexts/SidebarContext";
 
 interface SearchResult {
-  type: "user" | "book";
+  type: "user" | "book" | "transaction";
   id: string;
   title: string;
   subtitle: string;
@@ -34,7 +35,7 @@ const Header = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState<{
-    type: "user" | "book";
+    type: "user" | "book" | "transaction";
     data: any;
   } | null>(null);
 
@@ -42,6 +43,7 @@ const Header = () => {
   const [cachedUsers, setCachedUsers] = useState<any[]>([]);
   const [cachedBooks, setCachedBooks] = useState<any[]>([]);
   const [cachedInventory, setCachedInventory] = useState<any[]>([]);
+  const [cachedTransactions, setCachedTransactions] = useState<any[]>([]);
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
   // Fetch data only once when search interaction begins or on mount
@@ -56,6 +58,22 @@ const Header = () => {
         setCachedUsers(users);
         setCachedBooks(books);
         setCachedInventory(inventory);
+
+        // Extract all active transactions from books
+        const allTransactions: any[] = [];
+        books.forEach((book) => {
+          if (book.loans && Array.isArray(book.loans)) {
+            book.loans.forEach((loan: any) => {
+              allTransactions.push({
+                ...loan,
+                book_title: book.title,
+                book_isbn: book.isbn,
+                book_id: book._id,
+              });
+            });
+          }
+        });
+        setCachedTransactions(allTransactions);
       } catch (e) {
         console.error("Failed to fetch search data", e);
       }
@@ -131,9 +149,28 @@ const Header = () => {
       }
     });
 
+    // Search Transactions (by Transaction ID)
+    cachedTransactions.forEach((transaction) => {
+      if (transaction.transaction_id.toLowerCase().includes(term)) {
+        results.push({
+          type: "transaction",
+          id: transaction.transaction_id,
+          title: `Transaction: ${transaction.transaction_id}`,
+          subtitle: `${transaction.book_title} • Borrowed by ${transaction.user_name}`,
+          data: transaction,
+        });
+      }
+    });
+
     setSuggestions(results.slice(0, 8)); // Limit to 8 top results
     setShowSuggestions(true);
-  }, [searchTerm, cachedUsers, cachedBooks, cachedInventory]);
+  }, [
+    searchTerm,
+    cachedUsers,
+    cachedBooks,
+    cachedInventory,
+    cachedTransactions,
+  ]);
 
   // Handle clicking outside
   useEffect(() => {
@@ -198,13 +235,17 @@ const Header = () => {
                     className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                       item.type === "user"
                         ? "bg-blue-100 text-blue-600 dark:bg-blue-900/30"
-                        : "bg-green-100 text-green-600 dark:bg-green-900/30"
+                        : item.type === "book"
+                        ? "bg-green-100 text-green-600 dark:bg-green-900/30"
+                        : "bg-purple-100 text-purple-600 dark:bg-purple-900/30"
                     }`}
                   >
                     {item.type === "user" ? (
                       <UserIcon size={16} />
-                    ) : (
+                    ) : item.type === "book" ? (
                       <Book size={16} />
+                    ) : (
+                      <Receipt size={16} />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -345,13 +386,63 @@ const Header = () => {
       <Modal
         isOpen={!!selectedItem}
         onClose={() => setSelectedItem(null)}
-        title={selectedItem?.type === "user" ? "User Details" : "Book Details"}
+        title={
+          selectedItem?.type === "user"
+            ? "User Details"
+            : selectedItem?.type === "book"
+            ? "Book Details"
+            : "Transaction Details"
+        }
       >
-        {selectedItem && (
+        {selectedItem && selectedItem.type !== "transaction" && (
           <GlobalSearchDetails
             type={selectedItem.type}
             data={selectedItem.data}
           />
+        )}
+        {selectedItem && selectedItem.type === "transaction" && (
+          <div className="space-y-4">
+            <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+              <label className="text-xs text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">
+                Transaction ID
+              </label>
+              <div className="text-sm font-medium text-slate-800 dark:text-white mt-1 break-all">
+                {selectedItem.data.transaction_id}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div>
+                <label className="text-slate-500 dark:text-slate-400 block mb-1">
+                  Book
+                </label>
+                <div className="font-medium text-slate-800 dark:text-white">
+                  {selectedItem.data.book_title}
+                </div>
+                <div className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
+                  ISBN: {selectedItem.data.book_isbn}
+                </div>
+              </div>
+              <div>
+                <label className="text-slate-500 dark:text-slate-400 block mb-1">
+                  Borrowed By
+                </label>
+                <div className="font-medium text-slate-800 dark:text-white">
+                  {selectedItem.data.user_name}
+                </div>
+                <div className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
+                  ID: {selectedItem.data.borrowed_by}
+                </div>
+              </div>
+              <div>
+                <label className="text-slate-500 dark:text-slate-400 block mb-1">
+                  Due Date
+                </label>
+                <div className="font-medium text-slate-800 dark:text-white">
+                  {new Date(selectedItem.data.due_date).toLocaleDateString()}
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </Modal>
     </header>

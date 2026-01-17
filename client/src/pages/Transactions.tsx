@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiRequest } from "../services/api";
-import { Search } from "lucide-react";
+import { Search, Copy, Check } from "lucide-react";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 interface Transaction {
@@ -26,6 +26,7 @@ const Transactions = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [returningId, setReturningId] = useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const fetchTransactions = async () => {
     setLoading(true);
@@ -75,6 +76,16 @@ const Transactions = () => {
       alert("Failed to return book.");
     } finally {
       setReturningId(null);
+    }
+  };
+
+  const handleCopy = async (transactionId: string) => {
+    try {
+      await navigator.clipboard.writeText(transactionId);
+      setCopiedId(transactionId);
+      setTimeout(() => setCopiedId(null), 2000); // Reset after 2 seconds
+    } catch (error) {
+      console.error("Failed to copy", error);
     }
   };
 
@@ -146,8 +157,29 @@ const Transactions = () => {
                         key={t.transaction_id}
                         className="border-b border-slate-100 dark:border-slate-700 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
                       >
-                        <td className="p-4 text-sm font-mono text-slate-500 dark:text-slate-400">
-                          {t.transaction_id}
+                        <td className="p-4">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium text-slate-700 dark:text-slate-200 break-all">
+                              {t.transaction_id}
+                            </span>
+                            <button
+                              onClick={() => handleCopy(t.transaction_id)}
+                              className="flex-shrink-0 p-1.5 rounded hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                              title="Copy Transaction ID"
+                            >
+                              {copiedId === t.transaction_id ? (
+                                <Check
+                                  size={16}
+                                  className="text-green-600 dark:text-green-400"
+                                />
+                              ) : (
+                                <Copy
+                                  size={16}
+                                  className="text-slate-600 dark:text-slate-400"
+                                />
+                              )}
+                            </button>
+                          </div>
                         </td>
                         <td className="p-4 text-sm font-medium text-slate-800 dark:text-white">
                           {t.book_title}

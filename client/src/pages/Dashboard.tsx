@@ -6,6 +6,8 @@ import {
   AlertCircle,
   Archive,
   Github,
+  Copy,
+  Check,
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { apiRequest } from "../services/api";
@@ -20,7 +22,7 @@ const StatCard = ({ title, value, icon: Icon, color }: any) => (
         {title}
       </h3>
       <div
-        className={`p-2 rounded-lg ${color} bg-opacity-10 dark:bg-opacity-20 text-white`}
+        className={`p-2 rounded-lg ${color} bg-opacity-10 dark:bg-opacity-20`}
       >
         <Icon size={20} className={color.replace("bg-", "text-")} />
       </div>
@@ -39,6 +41,7 @@ const Dashboard = () => {
   const { stats, recentTransactions, overdueList, loading, refresh } =
     useDashboardData();
   const [returningId, setReturningId] = useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const handleReturn = async (transactionId: string) => {
     if (!transactionId) return;
@@ -53,6 +56,16 @@ const Dashboard = () => {
       toast.error("Failed to return book.");
     } finally {
       setReturningId(null);
+    }
+  };
+
+  const handleCopy = async (transactionId: string) => {
+    try {
+      await navigator.clipboard.writeText(transactionId);
+      setCopiedId(transactionId);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (error) {
+      console.error("Failed to copy", error);
     }
   };
 
@@ -91,15 +104,6 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-6 relative z-10">
-      {/* Background SVG */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-50 dark:opacity-40 translate-x-1/4 translate-y-1/4">
-        <img
-          src="/nirvana.svg"
-          className="w-full h-full object-cover"
-          alt="background"
-        />
-      </div>
-
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
         <StatCard
@@ -118,7 +122,7 @@ const Dashboard = () => {
           title="Active Loans"
           value={stats.activeTransactions}
           icon={Activity}
-          color="bg-amber-500"
+          color="bg-amber-600"
         />
         <StatCard
           title="Overdue Books"
@@ -184,14 +188,14 @@ const Dashboard = () => {
             {filteredRecent.map((loan: any) => (
               <div
                 key={loan._id}
-                className="flex items-center justify-between p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg border border-transparent hover:border-slate-100 dark:hover:border-slate-700 transition-all"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg border border-transparent hover:border-slate-100 dark:hover:border-slate-700 transition-all"
               >
-                <div className="flex items-center gap-4">
-                  <div className="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg">
+                <div className="flex items-start gap-3 sm:gap-4 min-w-0 flex-1">
+                  <div className="flex-shrink-0 p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg">
                     <Book size={20} />
                   </div>
-                  <div>
-                    <h4 className="font-medium text-slate-800 dark:text-white">
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-medium text-slate-800 dark:text-white truncate">
                       {loan.bookTitle || "Unknown Book"}
                     </h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -210,20 +214,39 @@ const Dashboard = () => {
                         Due: {new Date(loan.due_date).toLocaleDateString()}
                       </span>
                     </p>
-                    <div className="flex flex-col gap-0.5 mt-1">
-                      <p className="text-[10px] text-slate-400 dark:text-slate-600 font-mono">
-                        Book ID: {loan.book_id}
-                      </p>
-                      <p className="text-[10px] text-slate-400 dark:text-slate-600 font-mono">
-                        Transaction ID: {loan._id || loan.transaction_id}
-                      </p>
+                    <div className="flex flex-wrap items-center gap-2 mt-2">
+                      <span className="text-xs text-slate-500 dark:text-slate-400 font-medium flex-shrink-0">
+                        Transaction ID:
+                      </span>
+                      <span className="text-xs text-slate-700 dark:text-slate-200 font-medium font-mono break-all">
+                        {loan._id || loan.transaction_id}
+                      </span>
+                      <button
+                        onClick={() =>
+                          handleCopy(loan._id || loan.transaction_id)
+                        }
+                        className="flex-shrink-0 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                        title="Copy Transaction ID"
+                      >
+                        {copiedId === (loan._id || loan.transaction_id) ? (
+                          <Check
+                            size={14}
+                            className="text-green-600 dark:text-green-400"
+                          />
+                        ) : (
+                          <Copy
+                            size={14}
+                            className="text-slate-600 dark:text-slate-400"
+                          />
+                        )}
+                      </button>
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={() => handleReturn(loan._id)}
                   disabled={returningId === loan._id}
-                  className="text-slate-400 hover:text-green-600 transition-colors"
+                  className="w-full sm:w-auto self-end sm:self-auto text-slate-400 hover:text-green-600 transition-colors flex-shrink-0"
                   title="Return Book"
                 >
                   {returningId === loan._id ? "..." : <Archive size={18} />}

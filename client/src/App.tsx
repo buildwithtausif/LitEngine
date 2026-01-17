@@ -23,15 +23,6 @@ const DashboardLayout = () => (
     <TutorialProvider>
       <SidebarProvider>
         <div className="flex h-screen bg-[#FDFBF7] dark:bg-slate-900 transition-colors duration-300 relative overflow-hidden">
-          {/* Global Background Art */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <img
-              src="/nirvana.svg"
-              className="w-full h-full object-cover opacity-60 dark:opacity-20"
-              alt="background"
-            />
-          </div>
-
           <Sidebar />
           {/* Responsive main content area */}
           <div className="flex-1 flex flex-col lg:ml-64 h-screen overflow-hidden relative z-10">
