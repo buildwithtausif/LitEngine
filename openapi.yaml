@@ -1,0 +1,588 @@
+openapi: 3.1.0
+info:
+  title: LitEngine API
+  version: 1.0.0
+  description: Backend API for the LitEngine library management system.
+paths:
+  /api/books:
+    get:
+      summary: Get books
+      description: Retrieve books based on search criteria.
+      parameters:
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Filter by title (partial match)
+        - in: query
+          name: author
+          schema:
+            type: string
+          description: Filter by author (partial match)
+        - in: query
+          name: genre
+          schema:
+            type: string
+          description: Filter by genre (partial match)
+        - in: query
+          name: publisher
+          schema:
+            type: string
+          description: Filter by publisher (partial match)
+        - in: query
+          name: isbn
+          schema:
+            type: string
+          description: Filter by ISBN (exact match)
+        - in: query
+          name: id
+          schema:
+            type: string
+          description: Filter by Book UUID (exact match)
+      responses:
+        "200":
+          description: List of books matching the criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+        "404":
+          description: No books found matching the criteria
+        "500":
+          description: Internal Server Error
+
+    post:
+      summary: Add books
+      description: Add one or multiple books to the library.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/CreateBookDTO"
+                - type: array
+                  items:
+                    $ref: "#/components/schemas/CreateBookDTO"
+      responses:
+        "201":
+          description: Book(s) created successfully
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Book"
+                  - type: array
+                    items:
+                      $ref: "#/components/schemas/Book"
+        "400":
+          description: Bad Request (Missing fields or empty body)
+        "409":
+          description: Conflict (Duplicate ISBN)
+        "500":
+          description: Internal Server Error
+
+    patch:
+      summary: Update book
+      description: Update book details by ID or ISBN.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  format: uuid
+                  nullable: true
+                isbn:
+                  type: string
+                  nullable: true
+                edit_book_stack:
+                  type: array
+                  items:
+                    type: object
+                    description: Key-value pairs of fields to update
+              required:
+                - edit_book_stack
+      responses:
+        "200":
+          description: Book updated successfully
+        "400":
+          description: Bad Request (Missing identifier or empty stack)
+        "404":
+          description: Book not found
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+
+  /api/borrow:
+    post:
+      summary: Borrow books
+      description: Borrow one or more books for a user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  description: User ID (public ID or UUID)
+                books:
+                  oneOf:
+                    - type: array
+                      items:
+                        type: object
+                        properties:
+                          bookid:
+                            type: string
+                            format: uuid
+                        required:
+                          - bookid
+                    - type: object
+                      properties:
+                        bookid:
+                          type: string
+                          format: uuid
+                      required:
+                        - bookid
+              required:
+                - user_id
+                - books
+      responses:
+        "201":
+          description: Books borrowed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/BookLoan"
+        "400":
+          description: Bad Request (Invalid input or book ID)
+        "404":
+          description: User or Book not found
+        "409":
+          description: Conflict (Overdue books, limit reached, or book unavailable)
+        "500":
+          description: Internal Server Error
+
+  /api/inventory:
+    get:
+      summary: Read inventory
+      description: Get inventory details.
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: Inventory Item ID
+      responses:
+        "200":
+          description: Inventory data
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: array
+                    items:
+                      $ref: "#/components/schemas/InventoryItem"
+                  - $ref: "#/components/schemas/InventoryItem"
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+
+    post:
+      summary: Add to inventory
+      description: Create new inventory entries (single or bulk).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  properties:
+                    inventory:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/CreateInventoryDTO"
+                  required:
+                    - inventory
+                - $ref: "#/components/schemas/CreateInventoryDTO"
+      responses:
+        "200":
+          description: Inventory created successfully
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: array
+                    items:
+                      $ref: "#/components/schemas/InventoryItem"
+                  - $ref: "#/components/schemas/InventoryItem"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+
+    delete:
+      summary: Delete from inventory
+      description: Delete inventory items (single or bulk). Prevents deletion if active loans exist.
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: Single ID to delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        "200":
+          description: Deleted successfully
+        "400":
+          description: Bad Request (No IDs provided)
+        "409":
+          description: Conflict (Active loans exist)
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+
+  /api/return:
+    patch:
+      summary: Return books
+      description: Return borrowed books by transaction ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  transaction_id:
+                    type: string
+                    format: uuid
+                required:
+                  - transaction_id
+      responses:
+        "200":
+          description: Books returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/BookLoan"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+
+  /api/users:
+    get:
+      summary: Get users
+      description: Get all users or find specific user by ID or Email.
+      parameters:
+        - in: query
+          name: user_id
+          schema:
+            type: string
+          description: User ID
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: User Email
+      responses:
+        "200":
+          description: User(s) found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: array
+                    items:
+                      $ref: "#/components/schemas/User"
+                  - $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid email format
+        "404":
+          description: User not found or invalid query
+        "500":
+          description: Internal Server Error
+
+    post:
+      summary: Register user
+      description: Create a new user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDTO"
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Bad Request
+        "409":
+          description: Conflict (Email exists)
+        "500":
+          description: Internal Server Error
+
+  /api/users/{user_id}:
+    patch:
+      summary: Update user
+      description: Update user name or email.
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newName:
+                  type: string
+                  nullable: true
+                newEmail:
+                  type: string
+                  nullable: true
+      responses:
+        "200":
+          description: User updated
+        "400":
+          description: Bad Request
+        "404":
+          description: User not found
+        "409":
+          description: Conflict (Email taken)
+        "500":
+          description: Internal Server Error
+
+    delete:
+      summary: Delete user
+      description: Soft delete a user. Prevents deletion if active loans exist.
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User deleted
+        "404":
+          description: User not found
+        "409":
+          description: Conflict (Active loans)
+        "500":
+          description: Internal Server Error
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: User ID (Primary Key)
+        email:
+          type: string
+          nullable: true
+          description: Unique email (nullable if deleted)
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - _id
+        - created_at
+        - updated_at
+
+    CreateUserDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+      required:
+        - name
+        - email
+
+    Book:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: Book ID (Primary Key)
+        isbn:
+          type: string
+          nullable: true
+          description: Unique ISBN
+        title:
+          type: string
+        author:
+          type: string
+        genre:
+          type: string
+          nullable: true
+        publisher:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - _id
+        - created_at
+        - updated_at
+
+    CreateBookDTO:
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        isbn:
+          type: string
+        genre:
+          type: string
+        publisher:
+          type: string
+        quantity:
+          type: integer
+          description: Note used in current schema directly but accepted in API
+      required:
+        - title
+        - author
+
+    InventoryItem:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: Inventory ID (Primary Key)
+        bookId:
+          type: string
+          format: uuid
+          description: Foreign Key to Books
+        totalQty:
+          type: integer
+          default: 0
+        currentQty:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - _id
+        - created_at
+        - updated_at
+
+    CreateInventoryDTO:
+      type: object
+      properties:
+        bookid:
+          type: string
+          format: uuid
+        totalqty:
+          type: integer
+        currentqty:
+          type: integer
+      required:
+        - bookid
+        - totalqty
+
+    BookLoan:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: Loan ID (Primary Key)
+        loaned_to:
+          type: string
+          description: User ID
+        loaned_item:
+          type: string
+          format: uuid
+          description: Inventory ID
+        loaned_at:
+          type: string
+          format: date-time
+        due_by:
+          type: string
+          format: date-time
+        returned_on:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - _id
+        - loaned_at
+        - due_by

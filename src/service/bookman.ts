@@ -1,0 +1,4 @@
+// @ts-check
+class Bookman {
+    
+}
