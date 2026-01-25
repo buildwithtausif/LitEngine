@@ -1,0 +1,10 @@
+# hide all node_modules
+node_modules/
+# enviroment variables
+.env
+# exlude brainstorm files
+brainstorms/
+# exlude bruno collections folder
+booky-api-testing/
+
+.idea/
