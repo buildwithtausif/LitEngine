@@ -1,9 +1,9 @@
 import express from "express";
-import {
-    borrowBooks
-} from "../controllers/borrow.ctrl.mjs";
+import { borrowBooks } from "../controllers/borrow.ctrl.mjs";
 const borrow_router = express.Router();
 
-borrow_router.route("/").post(borrowBooks);
+import { asyncHandler } from "../utils/errorHandler.js";
+
+borrow_router.route("/").post(asyncHandler(borrowBooks));
 
 export default borrow_router;

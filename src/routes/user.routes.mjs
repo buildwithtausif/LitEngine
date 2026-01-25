@@ -8,8 +8,16 @@ import {
 // pre-fix all routes with /api/{given_endpoint}
 const user_router = express.Router();
 
-user_router.route("/").get(getusers).post(reg_newuser);
+import { asyncHandler } from "../utils/errorHandler.js";
 
-user_router.route("/:user_id").patch(update_user).delete(delete_user);
+user_router
+  .route("/")
+  .get(asyncHandler(getusers))
+  .post(asyncHandler(reg_newuser));
+
+user_router
+  .route("/:user_id")
+  .patch(asyncHandler(update_user))
+  .delete(asyncHandler(delete_user));
 
 export default user_router;
