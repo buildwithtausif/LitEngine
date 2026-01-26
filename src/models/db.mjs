@@ -41,7 +41,6 @@ const dbConfig = {
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
   connectionTimeoutMillis: 200000, // return an error after 2 seconds if connection could not be established
 };
-console.log(dbConfig);
 const db = pgp(dbConfig);
 
 (async () => {
