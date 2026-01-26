@@ -9,15 +9,16 @@ import {
 const user_router = express.Router();
 
 import { asyncHandler } from "../utils/errorHandler.js";
+import apiLimiter from "../middleware/rateLimiter.mjs";
 
 user_router
   .route("/")
   .get(asyncHandler(getusers))
-  .post(asyncHandler(reg_newuser));
+  .post(apiLimiter, asyncHandler(reg_newuser));
 
 user_router
   .route("/:user_id")
-  .patch(asyncHandler(update_user))
-  .delete(asyncHandler(delete_user));
+  .patch(apiLimiter, asyncHandler(update_user))
+  .delete(apiLimiter, asyncHandler(delete_user));
 
 export default user_router;
