@@ -8,7 +8,7 @@ const Ticker = () => {
   }>({
     type: "info",
     message:
-      "Demo Mode: Database operations are capped at 10 per IP session to maintain server stability.",
+      "Demo Mode: Please use dummy data (no PII) as this environment is public. IP addresses are never stored/shared and are used only for rate limiting. Database operations are capped at 10 per IP session.",
   });
 
   useEffect(() => {
@@ -43,15 +43,17 @@ const Ticker = () => {
           className="text-amber-600 dark:text-amber-500 flex-shrink-0"
         />
       )}
-      <p
-        className={`text-sm font-medium text-center ${
-          tickerState.type === "warning"
-            ? "text-red-800 dark:text-red-200"
-            : "text-amber-800 dark:text-amber-200"
-        }`}
-      >
-        {tickerState.message}
-      </p>
+      <div className="flex-1 overflow-hidden relative mx-4">
+        <p
+          className={`text-sm font-medium animate-marquee ${
+            tickerState.type === "warning"
+              ? "text-red-800 dark:text-red-200"
+              : "text-amber-800 dark:text-amber-200"
+          }`}
+        >
+          {tickerState.message}
+        </p>
+      </div>
     </div>
   );
 };
