@@ -8,8 +8,17 @@ import {
 // pre-fix all routes with /api/{given_endpoint}
 const user_router = express.Router();
 
-user_router.route("/").get(getusers).post(reg_newuser);
+import { asyncHandler } from "../utils/errorHandler.js";
+import apiLimiter from "../middleware/rateLimiter.mjs";
 
-user_router.route("/:user_id").patch(update_user).delete(delete_user);
+user_router
+  .route("/")
+  .get(asyncHandler(getusers))
+  .post(apiLimiter, asyncHandler(reg_newuser));
+
+user_router
+  .route("/:user_id")
+  .patch(apiLimiter, asyncHandler(update_user))
+  .delete(apiLimiter, asyncHandler(delete_user));
 
 export default user_router;
