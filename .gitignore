@@ -6,5 +6,7 @@ node_modules/
 brainstorms/
 # exlude bruno collections folder
 booky-api-testing/
-
+# intellij idea files
 .idea/
+# ignore .vite folder
+.vite/
