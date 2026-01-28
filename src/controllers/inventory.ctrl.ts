@@ -11,7 +11,6 @@ export default class inventoryController {
     try {
       // to handle query like : /api/inventory?id=UUID
       const { id } = req.query;
-      console.log(id);
       if (id) {
         if (typeof id !== "string") {
           return res.status(404).json({ Error: "Invalid ID provided" });
