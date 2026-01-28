@@ -8,3 +8,5 @@ brainstorms/
 booky-api-testing/
 # intellij idea files
 .idea/
+# ignore .vite folder
+.vite/
