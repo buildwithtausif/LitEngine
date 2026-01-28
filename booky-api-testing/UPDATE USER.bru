@@ -1,0 +1,28 @@
+meta {
+  name: UPDATE USER
+  type: http
+  seq: 4
+}
+
+patch {
+  url: http://localhost:8000/api/users/:user_id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  user_id: 26006-TD9MR7
+}
+
+body:json {
+  /* provide either of the two  */
+  {
+    "newName": "",
+    "newEmail": "pmjay@janshakti.com"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

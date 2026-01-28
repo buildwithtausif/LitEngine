@@ -1,0 +1,35 @@
+meta {
+  name: BORROW BOOKS
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:8000/api/borrow
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "user_id": "26006-SAA0HQ",
+    "books": [
+      {
+        "bookid": "eaa6fd7a-ffe3-4801-90aa-955a1c4cb183"
+      }
+  //     {
+  //       "bookid": "BOOK_UUID_2"
+  //     },
+  //         {
+  //       "bookid": "BOOK_UUID_2"
+  //     }
+    ]
+  }
+  
+  // not more than 3 transactions for a single user
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
