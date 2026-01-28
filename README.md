@@ -25,7 +25,7 @@
     PSQL_PASS=your_password             # Database password
     PSQL_DB=library                     # 'library' (dedicated) or 'postgres' (default)
     PORT=8000                           # Server port
-    VITE_API_BASE_URL=http://localhost:8000/api
+    VITE_API_BASE_URL=https://your-api-url.com/api    # Example: http://localhost:8000/api
     ```
 
     **Configuration Guide:**
@@ -33,7 +33,7 @@
     | Variable            | Description                                                                                                                                                                                                        |
     | :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `PSQL_HOST`         | Database address. Use `localhost` for local, or your cloud provider's host (e.g., AWS, Supabase).                                                                                                                  |
-    | `PSQL_PORT`         | `5432` is standard. Use `6543` if using a transaction pooler (common in Supabase).                                                                                                                                 |
+    | `PSQL_PORT`         | `5432` is standard. Use `6543` for Supabase transaction poolers.                                                                                                                                                   |
     | `PSQL_DB`           | Name of the database to connect to. <br>• **`library`**: Recommended. Requires creating a specific database.<br>• **`postgres`**: The default system DB. Use this for quick testing or if no custom DB is created. |
     | `PORT`              | The port the API server listens on.                                                                                                                                                                                |
     | `VITE_API_BASE_URL` | The public URL for the API.                                                                                                                                                                                        |

@@ -225,7 +225,7 @@ const ApiDocs = () => {
 
   const toggleItem = (index: number) => {
     setOpenItems((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
     );
   };
 
@@ -284,10 +284,80 @@ const ApiDocs = () => {
                   file:
                 </span>
                 <pre className="mt-2 p-3 bg-slate-900 text-slate-200 rounded-lg font-mono text-xs overflow-x-auto">
-                  PSQL_USER=your_postgres_username{"\n"}
-                  PSQL_PASS=your_postgres_password{"\n"}
-                  PSQL_DB=library
+                  {`PSQL_HOST=localhost                 # 'localhost' or cloud provider endpoint
+PSQL_PORT=5432                      # 5432 (default) or 6543 (poolers)
+PSQL_USER=your_username             # Database username
+PSQL_PASS=your_password             # Database password
+PSQL_DB=library                     # 'library' (dedicated) or 'postgres' (default)
+PORT=8000                           # Server port
+VITE_API_BASE_URL=https://your-api-url.com/api    # Example: http://localhost:8000/api`}
                 </pre>
+
+                <div className="mt-4">
+                  <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-2">
+                    Configuration Guide
+                  </h4>
+                  <div className="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900">
+                    <table className="w-full text-sm text-left">
+                      <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
+                        <tr>
+                          <th className="px-3 py-2 whitespace-nowrap">
+                            Variable
+                          </th>
+                          <th className="px-3 py-2">Description</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        <tr>
+                          <td className="px-3 py-2 font-mono text-indigo-600 dark:text-indigo-400">
+                            PSQL_HOST
+                          </td>
+                          <td className="px-3 py-2 text-slate-600 dark:text-slate-300">
+                            Database address. Use <code>localhost</code> for
+                            local, or your cloud provider's host.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-3 py-2 font-mono text-indigo-600 dark:text-indigo-400">
+                            PSQL_PORT
+                          </td>
+                          <td className="px-3 py-2 text-slate-600 dark:text-slate-300">
+                            <code>5432</code> is standard. Use <code>6543</code>{" "}
+                            for Supabase transaction poolers.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-3 py-2 font-mono text-indigo-600 dark:text-indigo-400">
+                            PSQL_DB
+                          </td>
+                          <td className="px-3 py-2 text-slate-600 dark:text-slate-300">
+                            Name of the database.
+                            <br />• <strong>library</strong>: Recommended
+                            (dedicated).
+                            <br />• <strong>postgres</strong>: Default system
+                            DB.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-3 py-2 font-mono text-indigo-600 dark:text-indigo-400">
+                            PORT
+                          </td>
+                          <td className="px-3 py-2 text-slate-600 dark:text-slate-300">
+                            The port the API server listens on.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-3 py-2 font-mono text-indigo-600 dark:text-indigo-400">
+                            VITE_API_BASE_URL
+                          </td>
+                          <td className="px-3 py-2 text-slate-600 dark:text-slate-300">
+                            The public URL for the API.
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </li>
               <li>
                 <span className="font-medium">Initialize the database:</span>
