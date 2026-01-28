@@ -1,0 +1,21 @@
+meta {
+  name: USERS
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8000/api/users
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~email: anushka.srivastava1502@gmail.com
+  ~user_id: 25361-NKJ1CP
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

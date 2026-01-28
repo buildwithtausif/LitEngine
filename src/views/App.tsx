@@ -14,6 +14,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { SidebarProvider } from "./contexts/SidebarContext";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
+import Ticker from "./components/Ticker";
 import { TutorialProvider } from "./contexts/TutorialContext";
 import ZainabGuide from "./components/ZainabGuide";
 import { Outlet } from "react-router-dom";
@@ -27,6 +28,7 @@ const DashboardLayout = () => (
           {/* Responsive main content area */}
           <div className="flex-1 flex flex-col lg:ml-64 h-screen overflow-hidden relative z-10">
             <Header />
+            <Ticker />
             <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 relative">
               <Outlet />
               <ZainabGuide />

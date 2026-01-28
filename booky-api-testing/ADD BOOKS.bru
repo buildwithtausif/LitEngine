@@ -1,0 +1,736 @@
+meta {
+  name: ADD BOOKS
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8000/api/books
+  body: json
+  auth: inherit
+}
+
+body:json {
+  /* supports array of objects or a single object */
+  [
+    {
+      "isbn": "9788123754659",
+      "title": "Sankalit Kahaniyan (Premchand)",
+      "author": "Munshi Premchand",
+      "genre": "Hindi Literature",
+      "publisher": "National Book Trust"
+    },
+    {
+      "isbn": "9788126711993",
+      "title": "Godan",
+      "author": "Munshi Premchand",
+      "genre": "Hindi Literature",
+      "publisher": "Rajkamal Prakashan"
+    },
+    {
+      "isbn": "9788126717148",
+      "title": "Gunaho Ka Devta",
+      "author": "Dharamvir Bharati",
+      "genre": "Hindi Literature",
+      "publisher": "Rajkamal Prakashan"
+    },
+    {
+      "isbn": "9788126704940",
+      "title": "Maila Aanchal",
+      "author": "Phanishwar Nath Renu",
+      "genre": "Hindi Literature",
+      "publisher": "Rajkamal Prakashan"
+    },
+    {
+      "isbn": "9788170283084",
+      "title": "Rashmirathi",
+      "author": "Ramdhari Singh Dinkar",
+      "genre": "Hindi Literature",
+      "publisher": "Rajpal & Sons"
+    },
+    {
+      "isbn": "9788170288676",
+      "title": "Madhushala",
+      "author": "Harivansh Rai Bachchan",
+      "genre": "Hindi Literature",
+      "publisher": "Rajpal & Sons"
+    },
+    {
+      "isbn": "9788126715106",
+      "title": "Tamas",
+      "author": "Bhisham Sahni",
+      "genre": "Hindi Literature",
+      "publisher": "Rajkamal Prakashan"
+    },
+    {
+      "isbn": "9788126705299",
+      "title": "Raag Darbari",
+      "author": "Shrilal Shukla",
+      "genre": "Hindi Literature",
+      "publisher": "Rajkamal Prakashan"
+    },
+    {
+      "isbn": "9788170284418",
+      "title": "Kitne Pakistan",
+      "author": "Kamleshwar",
+      "genre": "Hindi Literature",
+      "publisher": "Rajpal & Sons"
+    },
+    {
+      "isbn": "9780141439518",
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "English Literature",
+      "publisher": "Penguin Classics"
+    },
+    {
+      "isbn": "9780451524935",
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "English Literature",
+      "publisher": "Signet Classic"
+    },
+    {
+      "isbn": "9780061120084",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "English Literature",
+      "publisher": "Harper Perennial"
+    },
+    {
+      "isbn": "9780743273565",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "English Literature",
+      "publisher": "Scribner"
+    },
+    {
+      "isbn": "9780141441146",
+      "title": "Jane Eyre",
+      "author": "Charlotte Brontë",
+      "genre": "English Literature",
+      "publisher": "Penguin Classics"
+    },
+    {
+      "isbn": "9780141439556",
+      "title": "Wuthering Heights",
+      "author": "Emily Brontë",
+      "genre": "English Literature",
+      "publisher": "Penguin Classics"
+    },
+    {
+      "isbn": "9780141439563",
+      "title": "Great Expectations",
+      "author": "Charles Dickens",
+      "genre": "English Literature",
+      "publisher": "Penguin Classics"
+    },
+    {
+      "isbn": "9780142437247",
+      "title": "Moby Dick",
+      "author": "Herman Melville",
+      "genre": "English Literature",
+      "publisher": "Penguin Classics"
+    },
+    {
+      "isbn": "9780141439570",
+      "title": "The Picture of Dorian Gray",
+      "author": "Oscar Wilde",
+      "genre": "English Literature",
+      "publisher": "Penguin Classics"
+    },
+    {
+      "isbn": "9780062316097",
+      "title": "Sapiens: A Brief History of Humankind",
+      "author": "Yuval Noah Harari",
+      "genre": "History",
+      "publisher": "Harper"
+    },
+    {
+      "isbn": "9781408839997",
+      "title": "The Silk Roads",
+      "author": "Peter Frankopan",
+      "genre": "History",
+      "publisher": "Bloomsbury"
+    },
+    {
+      "isbn": "9780393317558",
+      "title": "Guns, Germs, and Steel",
+      "author": "Jared Diamond",
+      "genre": "History",
+      "publisher": "W. W. Norton & Company"
+    },
+    {
+      "isbn": "9780143031033",
+      "title": "The Discovery of India",
+      "author": "Jawaharlal Nehru",
+      "genre": "History",
+      "publisher": "Penguin India"
+    },
+    {
+      "isbn": "9780706990422",
+      "title": "Freedom at Midnight",
+      "author": "Dominique Lapierre & Larry Collins",
+      "genre": "History",
+      "publisher": "Vikas Publishing House"
+    },
+    {
+      "isbn": "9780330540209",
+      "title": "India After Gandhi",
+      "author": "Ramachandra Guha",
+      "genre": "History",
+      "publisher": "Picador"
+    },
+    {
+      "isbn": "9780553296983",
+      "title": "The Diary of a Young Girl",
+      "author": "Anne Frank",
+      "genre": "History",
+      "publisher": "Bantam"
+    },
+    {
+      "isbn": "9780767908184",
+      "title": "A Short History of Nearly Everything",
+      "author": "Bill Bryson",
+      "genre": "History",
+      "publisher": "Broadway Books"
+    },
+    {
+      "isbn": "9780141012117",
+      "title": "The Argumentative Indian",
+      "author": "Amartya Sen",
+      "genre": "History",
+      "publisher": "Penguin Books"
+    },
+    {
+      "isbn": "9781783962433",
+      "title": "Prisoners of Geography",
+      "author": "Tim Marshall",
+      "genre": "Geography",
+      "publisher": "Elliott & Thompson"
+    },
+    {
+      "isbn": "9781783966035",
+      "title": "The Power of Geography",
+      "author": "Tim Marshall",
+      "genre": "Geography",
+      "publisher": "Elliott & Thompson"
+    },
+    {
+      "isbn": "9780812982220",
+      "title": "Revenge of Geography",
+      "author": "Robert D. Kaplan",
+      "genre": "Geography",
+      "publisher": "Random House"
+    },
+    {
+      "isbn": "9781451640038",
+      "title": "Maphead",
+      "author": "Ken Jennings",
+      "genre": "Geography",
+      "publisher": "Scribner"
+    },
+    {
+      "isbn": "9780802715296",
+      "title": "Longitude",
+      "author": "Dava Sobel",
+      "genre": "Geography",
+      "publisher": "Walker & Company"
+    },
+    {
+      "isbn": "9780143117003",
+      "title": "Collapse: How Societies Choose to Fail or Succeed",
+      "author": "Jared Diamond",
+      "genre": "Geography",
+      "publisher": "Penguin Books"
+    },
+    {
+      "isbn": "9780446698377",
+      "title": "The Geography of Bliss",
+      "author": "Eric Weiner",
+      "genre": "Geography",
+      "publisher": "Twelve"
+    },
+    {
+      "isbn": "9780393242140",
+      "title": "Underland: A Deep Time Journey",
+      "author": "Robert Macfarlane",
+      "genre": "Geography",
+      "publisher": "W. W. Norton & Company"
+    },
+    {
+      "isbn": "9780199395279",
+      "title": "Certificate Physical and Human Geography",
+      "author": "G.C. Leong",
+      "genre": "Geography",
+      "publisher": "Oxford University Press"
+    },
+    {
+      "isbn": "9780061122415",
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "genre": "Fiction",
+      "publisher": "HarperOne"
+    },
+    {
+      "isbn": "9781594631931",
+      "title": "The Kite Runner",
+      "author": "Khaled Hosseini",
+      "genre": "Fiction",
+      "publisher": "Riverhead Books"
+    },
+    {
+      "isbn": "9780156027328",
+      "title": "Life of Pi",
+      "author": "Yann Martel",
+      "genre": "Fiction",
+      "publisher": "Harcourt"
+    },
+    {
+      "isbn": "9780812979657",
+      "title": "The God of Small Things",
+      "author": "Arundhati Roy",
+      "genre": "Fiction",
+      "publisher": "Random House Trade Paperbacks"
+    },
+    {
+      "isbn": "9780812976533",
+      "title": "Midnight's Children",
+      "author": "Salman Rushdie",
+      "genre": "Fiction",
+      "publisher": "Random House Trade Paperbacks"
+    },
+    {
+      "isbn": "9781594483851",
+      "title": "A Thousand Splendid Suns",
+      "author": "Khaled Hosseini",
+      "genre": "Fiction",
+      "publisher": "Riverhead Books"
+    },
+    {
+      "isbn": "9781416562603",
+      "title": "The White Tiger",
+      "author": "Aravind Adiga",
+      "genre": "Fiction",
+      "publisher": "Free Press"
+    },
+    {
+      "isbn": "9781400096206",
+      "title": "The Palace of Illusions",
+      "author": "Chitra Banerjee Divakaruni",
+      "genre": "Fiction",
+      "publisher": "Anchor"
+    },
+    {
+      "isbn": "9780618485222",
+      "title": "The Namesake",
+      "author": "Jhumpa Lahiri",
+      "genre": "Fiction",
+      "publisher": "Mariner Books"
+    },
+    {
+      "isbn": "9780590353427",
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "author": "J.K. Rowling",
+      "genre": "Children's Book",
+      "publisher": "Scholastic"
+    },
+    {
+      "isbn": "9780547928227",
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Children's Book",
+      "publisher": "Houghton Mifflin Harcourt"
+    },
+    {
+      "isbn": "9780142410318",
+      "title": "Charlie and the Chocolate Factory",
+      "author": "Roald Dahl",
+      "genre": "Children's Book",
+      "publisher": "Puffin Books"
+    },
+    {
+      "isbn": "9781503332546",
+      "title": "The Jungle Book",
+      "author": "Rudyard Kipling",
+      "genre": "Children's Book",
+      "publisher": "CreateSpace Independent Publishing Platform"
+    },
+    {
+      "isbn": "9780141301068",
+      "title": "Matilda",
+      "author": "Roald Dahl",
+      "genre": "Children's Book",
+      "publisher": "Puffin Books"
+    },
+    {
+      "isbn": "9780141439761",
+      "title": "Alice's Adventures in Wonderland",
+      "author": "Lewis Carroll",
+      "genre": "Children's Book",
+      "publisher": "Penguin Classics"
+    },
+    {
+      "isbn": "9780064400558",
+      "title": "Charlotte's Web",
+      "author": "E.B. White",
+      "genre": "Children's Book",
+      "publisher": "HarperCollins"
+    },
+    {
+      "isbn": "9780064471046",
+      "title": "The Lion, the Witch and the Wardrobe",
+      "author": "C.S. Lewis",
+      "genre": "Children's Book",
+      "publisher": "HarperCollins"
+    },
+    {
+      "isbn": "9780156012195",
+      "title": "The Little Prince",
+      "author": "Antoine de Saint-Exupéry",
+      "genre": "Children's Book",
+      "publisher": "Harcourt"
+    },
+    {
+      "isbn": "9780446605236",
+      "title": "The Notebook",
+      "author": "Nicholas Sparks",
+      "genre": "Romance Novels",
+      "publisher": "Warner Books"
+    },
+    {
+      "isbn": "9780143124542",
+      "title": "Me Before You",
+      "author": "Jojo Moyes",
+      "genre": "Romance Novels",
+      "publisher": "Penguin Books"
+    },
+    {
+      "isbn": "9780440212560",
+      "title": "Outlander",
+      "author": "Diana Gabaldon",
+      "genre": "Romance Novels",
+      "publisher": "Dell"
+    },
+    {
+      "isbn": "9780525478812",
+      "title": "The Fault in Our Stars",
+      "author": "John Green",
+      "genre": "Romance Novels",
+      "publisher": "Dutton Books"
+    },
+    {
+      "isbn": "9781501110368",
+      "title": "It Ends with Us",
+      "author": "Colleen Hoover",
+      "genre": "Romance Novels",
+      "publisher": "Atria Books"
+    },
+    {
+      "isbn": "9781250316776",
+      "title": "Red, White & Royal Blue",
+      "author": "Casey McQuiston",
+      "genre": "Romance Novels",
+      "publisher": "St. Martin's Griffin"
+    },
+    {
+      "isbn": "9780156029438",
+      "title": "The Time Traveler's Wife",
+      "author": "Audrey Niffenegger",
+      "genre": "Romance Novels",
+      "publisher": "Harcourt"
+    },
+    {
+      "isbn": "9788129115300",
+      "title": "2 States",
+      "author": "Chetan Bhagat",
+      "genre": "Romance Novels",
+      "publisher": "Rupa Publications"
+    },
+    {
+      "isbn": "9781472249173",
+      "title": "The Hating Game",
+      "author": "Sally Thorne",
+      "genre": "Romance Novels",
+      "publisher": "Little, Brown Book Group"
+    },
+    {
+      "isbn": "9781612680194",
+      "title": "Rich Dad Poor Dad",
+      "author": "Robert Kiyosaki",
+      "genre": "Business",
+      "publisher": "Plata Publishing"
+    },
+    {
+      "isbn": "9781585424337",
+      "title": "Think and Grow Rich",
+      "author": "Napoleon Hill",
+      "genre": "Business",
+      "publisher": "TarcherPerigee"
+    },
+    {
+      "isbn": "9780804139298",
+      "title": "Zero to One",
+      "author": "Peter Thiel",
+      "genre": "Business",
+      "publisher": "Crown Business"
+    },
+    {
+      "isbn": "9780307887894",
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "genre": "Business",
+      "publisher": "Crown Business"
+    },
+    {
+      "isbn": "9780857197689",
+      "title": "The Psychology of Money",
+      "author": "Morgan Housel",
+      "genre": "Business",
+      "publisher": "Harriman House"
+    },
+    {
+      "isbn": "9781501135910",
+      "title": "Shoe Dog",
+      "author": "Phil Knight",
+      "genre": "Business",
+      "publisher": "Scribner"
+    },
+    {
+      "isbn": "9780066620992",
+      "title": "Good to Great",
+      "author": "Jim Collins",
+      "genre": "Business",
+      "publisher": "Harper Business"
+    },
+    {
+      "isbn": "9781455586691",
+      "title": "Deep Work",
+      "author": "Cal Newport",
+      "genre": "Business",
+      "publisher": "Grand Central Publishing"
+    },
+    {
+      "isbn": "9780061241895",
+      "title": "Influence: The Psychology of Persuasion",
+      "author": "Robert Cialdini",
+      "genre": "Business",
+      "publisher": "Harper Business"
+    },
+    {
+      "isbn": "9780316051637",
+      "title": "The Disappearing Spoon",
+      "author": "Sam Kean",
+      "genre": "Chemistry",
+      "publisher": "Little, Brown and Company"
+    },
+    {
+      "isbn": "9781585423316",
+      "title": "Napoleon's Buttons",
+      "author": "Penny Le Couteur",
+      "genre": "Chemistry",
+      "publisher": "TarcherPerigee"
+    },
+    {
+      "isbn": "9780062024845",
+      "title": "Periodic Tales",
+      "author": "Hugh Aldersey-Williams",
+      "genre": "Chemistry",
+      "publisher": "Ecco"
+    },
+    {
+      "isbn": "9780375714671",
+      "title": "Uncle Tungsten",
+      "author": "Oliver Sacks",
+      "genre": "Chemistry",
+      "publisher": "Vintage"
+    },
+    {
+      "isbn": "9780544236042",
+      "title": "Stuff Matters",
+      "author": "Mark Miodownik",
+      "genre": "Chemistry",
+      "publisher": "Houghton Mifflin Harcourt"
+    },
+    {
+      "isbn": "9780316315258",
+      "title": "Caesar's Last Breath",
+      "author": "Sam Kean",
+      "genre": "Chemistry",
+      "publisher": "Little, Brown and Company"
+    },
+    {
+      "isbn": "9780813595832",
+      "title": "Ignition!",
+      "author": "John D. Clark",
+      "genre": "Chemistry",
+      "publisher": "Rutgers University Press"
+    },
+    {
+      "isbn": "9780486496331",
+      "title": "The Sceptical Chymist",
+      "author": "Robert Boyle",
+      "genre": "Chemistry",
+      "publisher": "Dover Publications"
+    },
+    {
+      "isbn": "9781579129712",
+      "title": "Molecules",
+      "author": "Theodore Gray",
+      "genre": "Chemistry",
+      "publisher": "Black Dog & Leventhal"
+    },
+    {
+      "isbn": "9780307588371",
+      "title": "Gone Girl",
+      "author": "Gillian Flynn",
+      "genre": "Adult",
+      "publisher": "Crown"
+    },
+    {
+      "isbn": "9781594634024",
+      "title": "The Girl on the Train",
+      "author": "Paula Hawkins",
+      "genre": "Adult",
+      "publisher": "Riverhead Books"
+    },
+    {
+      "isbn": "9780307474278",
+      "title": "The Da Vinci Code",
+      "author": "Dan Brown",
+      "genre": "Adult",
+      "publisher": "Anchor"
+    },
+    {
+      "isbn": "9781250301697",
+      "title": "The Silent Patient",
+      "author": "Alex Michaelides",
+      "genre": "Adult",
+      "publisher": "Celadon Books"
+    },
+    {
+      "isbn": "9780425274866",
+      "title": "Big Little Lies",
+      "author": "Liane Moriarty",
+      "genre": "Adult",
+      "publisher": "G.P. Putnam's Sons"
+    },
+    {
+      "isbn": "9780307341556",
+      "title": "Sharp Objects",
+      "author": "Gillian Flynn",
+      "genre": "Adult",
+      "publisher": "Broadway Books"
+    },
+    {
+      "isbn": "9780062678416",
+      "title": "The Woman in the Window",
+      "author": "A.J. Finn",
+      "genre": "Adult",
+      "publisher": "William Morrow"
+    },
+    {
+      "isbn": "9781538724736",
+      "title": "Verity",
+      "author": "Colleen Hoover",
+      "genre": "Adult",
+      "publisher": "Grand Central Publishing"
+    },
+    {
+      "isbn": "9780062060560",
+      "title": "Before I Go to Sleep",
+      "author": "S.J. Watson",
+      "genre": "Adult",
+      "publisher": "Harper Perennial"
+    },
+    {
+      "isbn": "9780062563293",
+      "title": "The Monk Who Sold His Ferrari",
+      "author": "Robin Sharma",
+      "genre": "Self-Help",
+      "publisher": "HarperOne"
+    },
+    {
+      "isbn": "9781577314806",
+      "title": "The Power of Now",
+      "author": "Eckhart Tolle",
+      "genre": "Self-Help",
+      "publisher": "New World Library"
+    },
+    {
+      "isbn": "9780671027032",
+      "title": "How to Win Friends and Influence People",
+      "author": "Dale Carnegie",
+      "genre": "Self-Help",
+      "publisher": "Gallery Books"
+    },
+    {
+      "isbn": "9781982137274",
+      "title": "The 7 Habits of Highly Effective People",
+      "author": "Stephen Covey",
+      "genre": "Self-Help",
+      "publisher": "Simon & Schuster"
+    },
+    {
+      "isbn": "9780143130727",
+      "title": "Ikigai: The Japanese Secret to a Long and Happy Life",
+      "author": "Héctor García & Francesc Miralles",
+      "genre": "Self-Help",
+      "publisher": "Penguin Life"
+    },
+    {
+      "isbn": "9781591846444",
+      "title": "Start With Why",
+      "author": "Simon Sinek",
+      "genre": "Self-Help",
+      "publisher": "Portfolio"
+    },
+    {
+      "isbn": "9781544512273",
+      "title": "Can't Hurt Me",
+      "author": "David Goggins",
+      "genre": "Self-Help",
+      "publisher": "Lioncrest Publishing"
+    },
+    {
+      "isbn": "9780062457714",
+      "title": "The Subtle Art of Not Giving a F*ck",
+      "author": "Mark Manson",
+      "genre": "Self-Help",
+      "publisher": "Harper"
+    },
+    {
+      "isbn": "9780735211292",
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "genre": "Self-Help",
+      "publisher": "Avery"
+    },
+    {
+      "isbn": "9780345472328",
+      "title": "Mindset: The New Psychology of Success",
+      "author": "Carol S. Dweck",
+      "genre": "Self-Help",
+      "publisher": "Ballantine Books"
+    },
+    {
+      "isbn": "9780140449266",
+      "title": "The Republic",
+      "author": "Plato",
+      "genre": "Philosophy",
+      "publisher": "Penguin Classics"
+    },
+    {
+      "isbn": "9780140449273",
+      "title": "Beyond Good and Evil",
+      "author": "Friedrich Nietzsche",
+      "genre": "Philosophy",
+      "publisher": "Penguin Classics"
+    }
+  ]
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
