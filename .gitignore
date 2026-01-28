@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # hide all node_modules
 node_modules/
 # enviroment variables
@@ -7,13 +6,5 @@ node_modules/
 brainstorms/
 # exlude bruno collections folder
 booky-api-testing/
-
+# intellij idea files
 .idea/
-=======
-node_modules/
-booky-api-testing/
-brainstorms/
-scripts/
-
-.env
->>>>>>> c5c761a (backend-deployment-branch-ready-to-merge-in-dev)

@@ -17,12 +17,29 @@
     npm install
     ```
 3.  Set up your `.env` file with the following database credentials:
+
     ```env
-    PSQL_USER=your_postgres_username
-    PSQL_PASS=your_postgres_password
-    PSQL_DB=library
+    PSQL_HOST=localhost                 # 'localhost' or cloud provider endpoint
+    PSQL_PORT=5432                      # 5432 (default) or 6543 (poolers)
+    PSQL_USER=your_username             # Database username
+    PSQL_PASS=your_password             # Database password
+    PSQL_DB=library                     # 'library' (dedicated) or 'postgres' (default)
+    PORT=8000                           # Server port
+    VITE_API_BASE_URL=http://localhost:8000/api
     ```
-    _(Ensure these match your local PostgreSQL setup)_
+
+    **Configuration Guide:**
+
+    | Variable            | Description                                                                                                                                                                                                        |
+    | :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `PSQL_HOST`         | Database address. Use `localhost` for local, or your cloud provider's host (e.g., AWS, Supabase).                                                                                                                  |
+    | `PSQL_PORT`         | `5432` is standard. Use `6543` if using a transaction pooler (common in Supabase).                                                                                                                                 |
+    | `PSQL_DB`           | Name of the database to connect to. <br>• **`library`**: Recommended. Requires creating a specific database.<br>• **`postgres`**: The default system DB. Use this for quick testing or if no custom DB is created. |
+    | `PORT`              | The port the API server listens on.                                                                                                                                                                                |
+    | `VITE_API_BASE_URL` | The public URL for the API.                                                                                                                                                                                        |
+
+    _(Ensure these match your actual PostgreSQL credentials)_
+
 4.  Initialize the database:
     ```bash
     # Run the setup script in your PostgreSQL instance
