@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # hide all node_modules
 node_modules/
 # enviroment variables
@@ -8,3 +9,11 @@ brainstorms/
 booky-api-testing/
 
 .idea/
+=======
+node_modules/
+booky-api-testing/
+brainstorms/
+scripts/
+
+.env
+>>>>>>> c5c761a (backend-deployment-branch-ready-to-merge-in-dev)
