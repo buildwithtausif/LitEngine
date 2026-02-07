@@ -8,7 +8,15 @@ import cors from "cors";
 // create an express-server
 const server = express();
 // the middleware issue :'( earlier I've not included it coz, was not getting it but now ik
-server.use(cors()); // to handle cors
+server.use(
+  cors({
+    origin: [
+      "https://litengine.buildwithtausif.in",
+      "https://litengine.vercel.app",
+      "https://litengine-frontend-m59hwwdf9-tausif-alams-projects.vercel.app",
+    ],
+  }),
+); // to handle cors
 server.use(express.json()); // to handle json request body as express does not parse json out-of-the box we need to explicitly define it to handle such requests
 const port = process.env.PORT || 8000;
 
